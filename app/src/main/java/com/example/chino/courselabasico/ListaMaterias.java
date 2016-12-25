@@ -9,10 +9,9 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 
-import com.example.chino.courselabasico.adaptador.ContactosAdaptador;
 import com.example.chino.courselabasico.adaptador.MateriasAdaptador;
 import com.example.chino.courselabasico.baseDatos.BaseDatos;
-import com.example.chino.courselabasico.configuracion.Configuracion;
+import com.example.chino.courselabasico.configuracion.ConfiguracionPorcentajes;
 import com.example.chino.courselabasico.models.*;
 
 import java.util.ArrayList;
@@ -74,7 +73,7 @@ public class ListaMaterias extends AppCompatActivity {
                 break;
             case R.id.mConfiguracion:
 
-                Intent j = new Intent(this,Configuracion.class);
+                Intent j = new Intent(this,ConfiguracionPorcentajes.class);
                 this.startActivity(j);
 
                 break;

@@ -76,7 +76,7 @@ public class BaseDatos extends SQLiteOpenHelper
                             registros.getColumnIndex(DataBaseManager.MATERIA_FOTO)
                     ),
                     // obtengo el id de la foto
-                    registros.getString(
+                    registros.getDouble(
                             registros.getColumnIndex(DataBaseManager.MATERIA_DEFINITIVA)
                     )
                     ) );

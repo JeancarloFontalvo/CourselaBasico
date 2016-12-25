@@ -9,12 +9,12 @@ public class Materia
     private int      id;
     private String   nombre;
     private int      imagenId;
-    private String   materiaDefinitiva;
+    private Double   materiaDefinitiva;
 
 
 
 
-    public Materia(int id, String nombre, int imagenId, String materiaDefinitiva)
+    public Materia(int id, String nombre, int imagenId, Double materiaDefinitiva)
     {
 
         this.nombre     = nombre;
@@ -59,11 +59,11 @@ public class Materia
     }
 
 
-    public String getMateriaDefinitiva() {
+    public Double getMateriaDefinitiva() {
         return materiaDefinitiva;
     }
 
-    public void setMateriaDefinitiva(String materiaDefinitiva) {
+    public void setMateriaDefinitiva(Double materiaDefinitiva) {
         this.materiaDefinitiva = materiaDefinitiva;
     }
 }

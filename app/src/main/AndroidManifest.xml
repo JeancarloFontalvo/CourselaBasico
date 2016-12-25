@@ -31,7 +31,7 @@
         </activity>
         <activity android:name=".ActivityIngresarNotas" />
         <activity android:name=".About" />
-        <activity android:name=".configuracion.Configuracion" />
+        <activity android:name=".configuracion.ConfiguracionPorcentajes" />
         <activity android:name=".Subnotas"></activity>
     </application>
 

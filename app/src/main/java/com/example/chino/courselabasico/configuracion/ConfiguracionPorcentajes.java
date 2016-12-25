@@ -14,7 +14,7 @@ import com.example.chino.courselabasico.R;
 import com.example.chino.courselabasico.baseDatos.BaseDatos;
 import com.example.chino.courselabasico.baseDatos.DataBaseManager;
 
-public class Configuracion extends AppCompatActivity {
+public class ConfiguracionPorcentajes extends AppCompatActivity {
 
     TextView tvCorte1;
     TextView tvCorte2;

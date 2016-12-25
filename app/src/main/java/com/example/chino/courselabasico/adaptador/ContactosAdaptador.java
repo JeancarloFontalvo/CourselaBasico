@@ -114,7 +114,7 @@ public class ContactosAdaptador extends RecyclerView.Adapter<ContactosAdaptador.
             tvNombreCv=(TextView)itemView.findViewById(R.id.tvNombreCv);
 
             tvCorte1=(TextView)itemView.findViewById(R.id.tvNotaCorte1);
-            
+
         }
     }
 

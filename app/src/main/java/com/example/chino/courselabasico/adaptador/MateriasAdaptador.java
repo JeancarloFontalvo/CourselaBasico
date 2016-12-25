@@ -56,7 +56,7 @@ public class MateriasAdaptador extends RecyclerView.Adapter<MateriasAdaptador.Ma
         final Materia Materia= materias.get(position);
         Materia_ViewHolder.imgFoto.setImageResource(Materia.getImagenId());
         Materia_ViewHolder.tvNombreCv.setText(Materia.getNombre());
-        Materia_ViewHolder.tvCorte1.setText(Materia.getMateriaDefinitiva());
+        Materia_ViewHolder.tvCorte1.setText(String.valueOf(Materia.getMateriaDefinitiva()));
 //        Materia_ViewHolder.tvCorte2.setText(Materia.getNotaCorte2());
 //        Materia_ViewHolder.tvCorte3.setText(Materia.getNotaCorte3());
 
@@ -81,13 +81,6 @@ public class MateriasAdaptador extends RecyclerView.Adapter<MateriasAdaptador.Ma
             }
         });
 
-        //haciendo que el boton like sea clicleable
-//        Materia_ViewHolder.btnLike.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                Toast.makeText(activity, "like a "+Materia.getNombre(), Toast.LENGTH_SHORT).show();
-//            }
-//        });
 
 
     }

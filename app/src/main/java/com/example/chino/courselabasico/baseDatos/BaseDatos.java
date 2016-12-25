@@ -17,8 +17,8 @@ import java.util.ArrayList;
 
 public class BaseDatos extends SQLiteOpenHelper
 {
-    private static final String BD_NOMBRE="bd_notas.sqlite";
-    private static final int  BD_VERSION=1;
+    private static final String BD_NOMBRE       =   "bd_notas.sqlite";
+    private static final int    BD_VERSION      =   1;
 
     public BaseDatos(Context context){
         super(context, BD_NOMBRE, null, BD_VERSION);
@@ -181,66 +181,40 @@ public class BaseDatos extends SQLiteOpenHelper
     }
 
     //metodo que inserta una materia registros de la bd
-    public  void  addMateria(ContentValues contentValues)
+    public  void  addMateria(String Table, ContentValues contentValues)
     {
         SQLiteDatabase db = this.getWritableDatabase();
-        db.insert(DataBaseManager.NOMBRE_TABLA_MATERIA, null, contentValues);
+        db.insert(Table, null, contentValues);
         db.close();
     }
 
-    public  void  addPorcentajes(ContentValues contentValues)
-    {
-        SQLiteDatabase db = this.getWritableDatabase();
-        db.insert(DataBaseManager.NOMBRE_TABLA_PORCENTAJECORTES, null, contentValues);
-        db.close();
-    }
-
-    public  void  addCortes(ContentValues contentValues)
-    {
-        SQLiteDatabase db = this.getWritableDatabase();
-        db.insert(DataBaseManager.NOMBRE_TABLA_CORTEMATERIA, null, contentValues);
-        db.close();
-    }
-
-    // ESTE METODO DE ESTA CLASE PERMITE GUARDAR DATOS EN LA TABLACORTES
-    public  void  addNotas(ContentValues contentValues)
-    {
-        SQLiteDatabase db = this.getWritableDatabase();
-        db.insert(DataBaseManager.NOMBRE_TABLA_NOTA, null, contentValues);
-        db.close();
-    }
     // - - - - - - - - - - - - - - - - - - - - - -  - - - - - -
     // - - - - - - ACTUALIZAR  - - - - -  - - - - - -
     // - - - - - - - - - - - - - - - - - - - - - -  - - - - - -
 
 
     //metodo que inserta una materia registros de la bd
-    public  void  updateMateria(ContentValues contentValues)
+    public  void  updateMateria(String Table, String column, int id, ContentValues contentValues)
     {
-        SQLiteDatabase db = this.getWritableDatabase();
-        db.update(DataBaseManager.NOMBRE_TABLA_MATERIA, contentValues, );
+        SQLiteDatabase  db          = this.getWritableDatabase();
+        String[]        parameters  = new String[] { String.valueOf( id ) };
+
+        db.update(Table, contentValues, column + " = ?", parameters);
         db.close();
     }
 
-    public  void  updatePorcentajes(ContentValues contentValues)
-    {
-        SQLiteDatabase db = this.getWritableDatabase();
-        db.update(DataBaseManager.NOMBRE_TABLA_PORCENTAJECORTES, contentValues, );
-        db.close();
-    }
+    // - - - - - - - - - - - - - - - - - - - - - -  - - - - - -
+    // - - - - - - ELIMINAR  - - - - -  - - - - - -
+    // - - - - - - - - - - - - - - - - - - - - - -  - - - - - -
 
-    public  void  updateCortes(ContentValues contentValues)
-    {
-        SQLiteDatabase db = this.getWritableDatabase();
-        db.update(DataBaseManager.NOMBRE_TABLA_CORTEMATERIA, contentValues, );
-        db.close();
-    }
 
-    // ESTE METODO DE ESTA CLASE PERMITE GUARDAR DATOS EN LA TABLACORTES
-    public  void  updateNotas(ContentValues contentValues)
+    //metodo que inserta una materia registros de la bd
+    public  void  deleteMateria(String Table, String column, int id)
     {
-        SQLiteDatabase db = this.getWritableDatabase();
-        db.update(DataBaseManager.NOMBRE_TABLA_NOTA, contentValues, "");
+        SQLiteDatabase  db          = this.getWritableDatabase();
+        String[]        parameters  = new String[] { String.valueOf( id ) };
+
+        db.delete(Table, column + " = ?", parameters);
         db.close();
     }
 

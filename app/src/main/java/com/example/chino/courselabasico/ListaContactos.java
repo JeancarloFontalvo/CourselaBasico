@@ -14,13 +14,14 @@ import com.example.chino.courselabasico.adaptador.ContactosAdaptador;
 import com.example.chino.courselabasico.baseDatos.BaseDatos;
 import com.example.chino.courselabasico.configuracion.Configuracion;
 import com.example.chino.courselabasico.pojo.Contacto;
+import com.example.chino.courselabasico.models.*;
 
 import java.util.ArrayList;
 
 public class ListaContactos extends AppCompatActivity {
-//coleccion de contactos ;
-    ArrayList <Contacto>contactos;
-    private RecyclerView listaContactosCV;
+    //coleccion de contactos ;
+    ArrayList <Materia>  materias;
+    private RecyclerView listaMaterias;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,13 +35,13 @@ public class ListaContactos extends AppCompatActivity {
 //        //habilitamos la navegacion hacia atras en el tolbar
 //        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
-        listaContactosCV=(RecyclerView)findViewById(R.id.rvListaContactos);
+        listaMaterias=(RecyclerView)findViewById(R.id.rvListaContactos);
         // se define la forma en que se muestra el recycer view
 
         //***************************************** EN FORMA DE LISTA VERTICAL
         LinearLayoutManager llm= new LinearLayoutManager(this);
         llm.setOrientation(LinearLayoutManager.VERTICAL);  //definiendo la orientacion del  la vista
-         listaContactosCV.setLayoutManager(llm);  // este objeto se comporte como un linear layout
+        listaMaterias.setLayoutManager(llm);  // este objeto se comporte como un linear layout
         //****************************************
 
         //************************************* MUESTRA LOS ELEMENTOS EN FORMA DE GRID
@@ -96,17 +97,17 @@ public class ListaContactos extends AppCompatActivity {
     //instancia de contacto adaptador
     public  void inicializarAdaptador()
     {
-        ContactosAdaptador adaptador = new ContactosAdaptador(contactos,this);
-        listaContactosCV.setAdapter(adaptador);
+        ContactosAdaptador adaptador = new ContactosAdaptador(materias,this);
+        listaMaterias.setAdapter(adaptador);
     }
 
     public  void inicializarListaContactos()
     {
-        BaseDatos db = new BaseDatos(this);
-        contactos = new ArrayList<Contacto>();
+        BaseDatos db    = new BaseDatos(this);
+        materias        = new ArrayList<Materia>();
 
         // cuando carga el elemento se carga el array list
-        contactos=db.obtenerTodosContactos();
+        materias        = db.obtenerTodosContactos();
 
     }
 

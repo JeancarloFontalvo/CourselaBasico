@@ -17,6 +17,7 @@ public class BaseDatos extends SQLiteOpenHelper
 {
     private static final String BD_NOMBRE       =   "bd_notas.sqlite";
     private static final int    BD_VERSION      =   1;
+    private static BaseDatos    db              =   null;
 
     public BaseDatos(Context context){
         super(context, BD_NOMBRE, null, BD_VERSION);
@@ -220,5 +221,69 @@ public class BaseDatos extends SQLiteOpenHelper
         db.close();
     }
 
+    // ---------------------------------------------------
+    // ------------------ METODOS ESTATICOS --------------
+    // ---------------------------------------------------
 
+        /**
+         * @author Jeancarlo Fontalvo
+         * @param context
+         * @return La instancia singular de Base de datos
+         */
+        public static BaseDatos getDb(Context context)
+        {
+            if(db == null)
+            {
+                db = new BaseDatos(context);
+            }
+
+            return db;
+        }
+
+        //metodo que inserta una materia registros de la bd
+        public  static long  add(Context context, String Table, ContentValues contentValues)
+        {
+            SQLiteDatabase db   = getDb(context).getWritableDatabase();
+            // - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+            long result         = db.insert(Table, null, contentValues);
+            db.close();
+
+            return result;
+        }
+
+        // - - - - - - - - - - - - - - - - - - - - - -  - - - - - -
+        // - - - - - - ACTUALIZAR  - - - - -  - - - - - -
+        // - - - - - - - - - - - - - - - - - - - - - -  - - - - - -
+
+
+        //metodo que inserta una materia registros de la bd
+        public  static long  update(Context context, String Table, String column, int id, ContentValues contentValues)
+        {
+            SQLiteDatabase  db          = getDb(context).getWritableDatabase();
+            String[]        parameters  = new String[] { String.valueOf( id ) };
+            // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+            long result = db.update(Table, contentValues, column + " = ?", parameters);
+            db.close();
+
+            return result;
+        }
+
+        // - - - - - - - - - - - - - - - - - - - - - -  - - - - - -
+        // - - - - - - ELIMINAR  - - - - -  - - - - - -
+        // - - - - - - - - - - - - - - - - - - - - - -  - - - - - -
+
+
+        //metodo que inserta una materia registros de la bd
+        public  static long  delete(Context context, String Table, String column, int id)
+        {
+            SQLiteDatabase  db          = getDb(context).getWritableDatabase();
+            String[]        parameters  = new String[] { String.valueOf( id ) };
+            // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+            long result                 = db.delete(Table, column + " = ?", parameters);
+            db.close();
+
+            return result;
+        }
+
+    /// -----------------------------------------------------------------
 }

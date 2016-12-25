@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#FFC107</color>
+    <color name="colorPrimaryDark">#FFA000</color>
+    <color name="colorAccent">#00BCD4</color>
+
+    <color name ="colorSnacbar">#33f2ef</color>
+
+    <color name="success">#35b60e</color>
+    <color name="blanco">#fff</color>
+    <color name="negro">#000000</color>
+
+    <!--colores del boton guardar -->
+    <color name="colorPrimerPlano">#EC407A</color>
+    <color name="colorSegundoPlano">#AB47BC</color>
+    <color name="colorsuccess">#208c19</color>
+    <color name="colorError">#9e0915</color>
+
+    <color name="colorPrimerPlano2">#1f9142</color>
+    <color name="colorSegundoPlano2">#4785bc</color>
+
+</resources>

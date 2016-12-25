@@ -1,0 +1,25 @@
+<resources>
+
+    <!-- Base application theme. -->
+    <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
+        <!-- Customize your theme here. -->
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorAccent">@color/colorAccent</item>
+
+    </style>
+
+    <!--estilo material desing propio-->
+    <style name="MyButton" parent="Theme.AppCompat.Light">
+        <item name="colorControlHighlight">@color/colorSegundoPlano</item>
+        <item name="colorButtonNormal">@color/colorPrimerPlano</item>
+
+    </style>
+    <!--estilo material desing propio-->
+    <style name="MyButton2" parent="Theme.AppCompat.Light">
+        <item name="colorControlHighlight">@color/colorSegundoPlano2</item>
+        <item name="colorButtonNormal">@color/colorPrimerPlano2</item>
+
+    </style>
+
+</resources>

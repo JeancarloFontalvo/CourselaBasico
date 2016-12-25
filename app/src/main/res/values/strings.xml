@@ -1,0 +1,80 @@
+<resources>
+    <string name="app_name" translatable="false">Nota </string>
+    <string name="saludo" translatable="false"> Saludo Juan David Redondo Robles </string>
+
+    <string name="tituloTarjeta" translatable="false"> Android Lollipop 5.0</string>
+    <string name="descripcionTitulo" translatable="false"> En esta Version se Incluyo el material desing, Android Lollipop implementando nuevos
+    widges que hacen que la eperiencia de usuario sea mucho mejor, y lo mejor de todo es que vienen con soporte para versiones anteriores a lolliopo
+        por lo que puede correr en versiones anteriores
+    </string>
+
+    <!-- declarando un areglo de nombres de planetas -->
+    <string-array name="listadoPlanetas">
+
+        <item> Mercurio</item>
+        <item> Venus</item>
+        <item> Tierra</item>
+        <item> Marte</item>
+        <item> Jupiter</item>
+
+    </string-array>
+    <string-array name="listadoFrutas">
+
+        <item>Animaciones</item>
+        <item>Recycler View  </item>
+        <item>Menu de opciones</item>
+        <item>coco</item>
+        <item> guanabana</item>
+        <item>fresa</item>
+        <item>frambuesa</item>
+        <item>limon</item>
+        <item>uva</item>
+        <item>Melón</item>
+        <item>Zapote </item>
+        <item>Nispero </item>
+        <item>Kiwi </item>
+        <item>Mora </item>
+        <item>Maracuya </item>
+        <item>Piña </item>
+        <item>Toronja </item>
+        <item>Pomelo </item>
+
+    </string-array>
+
+
+    <!--listado de nombres que hay en el activity ListaContactos -->
+    <string name="nombre" translatable="false"> Juan David Redondo</string>
+    <string name="telefono" translatable="false"> 3043377736</string>
+    <string name="email" translatable="false"> juandredondo@gmail.com</string>
+    <string name="Juan" translatable="false"> juandredondo@gmail.com</string>
+
+    <!-- VIDEO DE INTENT IMPLICITOA Y EXPLICITOS -->
+    <string name="pNombre" translatable="false">pNombre</string>
+    <string name="pTelefono" translatable="false">pTelefono</string>
+    <string name="pEmail" translatable="false">pEmail</string>
+
+
+    <!-- opciones de spinner del activity MenuOPciones.xml-->
+    <string-array name="opcionesMenuOPciones">
+
+        <item>Menu  de OPciones</item>
+        <item>Menu  de Contexto</item>
+        <item>Menu  de popup </item>
+        <item></item>
+        <item></item>
+
+
+    </string-array>
+    <!-- opciones de spinner del activity MenuOPciones.xml-->
+    <string-array name="opcionesAvatar">
+        <item>Avatar Chico</item>
+        <item>Avatar Chica</item>
+    </string-array>
+
+    <!--nombres de los menu de contextos -->
+    <string name="menuAbout">About</string>
+    <string name="menuConfiguracion">Configuracion</string>
+    <string name="menuEliminar">Eliminar</string>
+    <string name="menuBusqueda">Busqueda</string>
+
+</resources>

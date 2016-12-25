@@ -6,12 +6,11 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.chino.courselabasico.DetalleListaContacto;
+import com.example.chino.courselabasico.DetalleListaMateria;
 import com.example.chino.courselabasico.R;
 import com.example.chino.courselabasico.pojo.Contacto;
 
@@ -42,7 +41,7 @@ public class ContactosAdaptador extends RecyclerView.Adapter<ContactosAdaptador.
     public ConntactoViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         //le da vida al layout, ES DE CIR INFlar en layout para que se vea como una vista, la idea es asodical cardViewContacto al recycler view
 
-        View v= LayoutInflater.from(parent.getContext()).inflate(R.layout.cardview_contacto,parent,false);
+        View v= LayoutInflater.from(parent.getContext()).inflate(R.layout.cardview_materias,parent,false);
 
         return  new ConntactoViewHolder(v);
     }
@@ -70,7 +69,7 @@ public class ContactosAdaptador extends RecyclerView.Adapter<ContactosAdaptador.
                 Toast.makeText(activity, " HOLA : "+contacto.getNombre(), Toast.LENGTH_SHORT).show();
 
                 //llamando a el activity de detalles y se le mandan por parametros los textos
-                Intent i = new Intent(activity,DetalleListaContacto.class);
+                Intent i = new Intent(activity,DetalleListaMateria.class);
 
                 i.putExtra("param_Nombre",contacto.getNombre());
                 i.putExtra("param_corte1",contacto.getNotaCorte1());
@@ -115,8 +114,7 @@ public class ContactosAdaptador extends RecyclerView.Adapter<ContactosAdaptador.
             tvNombreCv=(TextView)itemView.findViewById(R.id.tvNombreCv);
 
             tvCorte1=(TextView)itemView.findViewById(R.id.tvNotaCorte1);
-            tvCorte2=(TextView) itemView.findViewById(R.id.tvNotaCorte2);
-            tvCorte3=(TextView) itemView.findViewById(R.id.tvNotaCorte3);
+            
         }
     }
 

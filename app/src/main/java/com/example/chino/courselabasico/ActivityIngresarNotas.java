@@ -1,25 +1,18 @@
 package com.example.chino.courselabasico;
 
-import android.app.Activity;
 import android.content.ContentValues;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.KeyEvent;
 import android.view.View;
-import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.chino.courselabasico.baseDatos.BaseDatos;
 import com.example.chino.courselabasico.baseDatos.DataBaseManager;
-
-import java.security.PublicKey;
-
-import static com.example.chino.courselabasico.R.id.btnGuardar;
 
 public class ActivityIngresarNotas extends AppCompatActivity  {
 
@@ -161,10 +154,10 @@ public class ActivityIngresarNotas extends AppCompatActivity  {
     if(keyCode==KeyEvent.KEYCODE_BACK)
     {
         //levanta un nuevo intent que llama a la actividad ListaContacto
-        //startActivity( new Intent(DetalleListaContacto.this,ListaContactos.class))
+        //startActivity( new Intent(DetalleListaMateria.this,ListaMaterias.class))
 
         finish();
-        Intent i = new Intent(this,ListaContactos.class);
+        Intent i = new Intent(this,ListaMaterias.class);
         this.startActivity(i);
     }
     return super.onKeyDown(keyCode, event);
@@ -175,31 +168,27 @@ public class ActivityIngresarNotas extends AppCompatActivity  {
     //se ejecuta esta funcion cuando el usuario pulsa el boton guardar
     public  void  insertarNotas(View v ){
         BaseDatos db = new BaseDatos(this);
-        insertarContactos(db);
+        insertarMaterias(db);
     }
     ///////////////////////////////////////////////////////////////////////////////////////////////////
-    public  void insertarContactos(BaseDatos db)
+    public  void insertarMaterias(BaseDatos db)
     {
         String NombreMat=tvNombreMateria.getText().toString();
         String corte1=etNumero1.getText().toString();
-        String corte2=etNumero2.getText().toString();
-        String corte3=etNumero3.getText().toString();
 
         String Nota=resultadoParaGuardar;
 
         ContentValues contentValues = new ContentValues();
-        contentValues.put(DataBaseManager.ESTUDIANTE_NOMBRE_MATERIA,NombreMat);
-        contentValues.put(DataBaseManager.ESTUDIANTE_NOTA_CORTE1,corte1);
-        contentValues.put(DataBaseManager.ESTUDIANTE_NOTA_CORTE2,corte2);
-        contentValues.put(DataBaseManager.ESTUDIANTE_NOTA_CORTE3,corte3);
-        contentValues.put(DataBaseManager.ESTUDIANTE_FOTO,CARITA_MOTICON);
+        contentValues.put(DataBaseManager.MATERIA_NOMBRE_MATERIA,NombreMat);
+        contentValues.put(DataBaseManager.MATERIA_DEFINITIVA,corte1);
+        contentValues.put(DataBaseManager.MATERIA_FOTO,CARITA_MOTICON);
 
-        db.insertarContacto(contentValues);
+        db.addMateria(DataBaseManager.NOMBRE_TABLA_MATERIA,contentValues);
         Toast.makeText(this, "Se Guardo las notas de la Asignatura"+NombreMat, Toast.LENGTH_SHORT).show();
        //cierra la actividad en curso
         finish();
       //  llama a la actividad en donde esta el recycler view
-        Intent i = new Intent(this,ListaContactos.class);
+        Intent i = new Intent(this,ListaMaterias.class);
         this.startActivity(i);
 
 //        inicializarAdaptador();

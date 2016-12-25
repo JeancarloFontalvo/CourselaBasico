@@ -10,6 +10,7 @@ public class DataBaseManager {
     public static  final String MATERIA_ID              =   "materia_id";
     public static  final String MATERIA_NOMBRE_MATERIA  =   "materia_nombre";
     public static  final String MATERIA_FOTO            =   "materia_foto";
+    public static  final String MATERIA_DEFINITIVA      =   "materia_definitiva";
 
     //estas son las constantes de la tabla corteMateria
     public static  final String NOMBRE_TABLA_CORTEMATERIA   =   "tbl_cortemateria";
@@ -36,6 +37,7 @@ public class DataBaseManager {
             " create table " + NOMBRE_TABLA_MATERIA+" ("+
                     MATERIA_ID             + " INTEGER PRIMARY KEY AUTOINCREMENT,"+
                     MATERIA_NOMBRE_MATERIA + " TEXT , " +
+                    MATERIA_DEFINITIVA     + " REAL  , " +
                     MATERIA_FOTO           + " INTEGER NOT NULL"+");";
 
     public static  final String CREAR_TABLA_PORCETAJECORTES=

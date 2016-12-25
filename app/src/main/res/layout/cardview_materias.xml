@@ -65,7 +65,7 @@
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="Nota Corte 1 : "
+                        android:text="Nota Definitiva:"
                         android:layout_marginTop="10sp"
                         android:id="@+id/tvNota1"
                         android:textSize="15sp"
@@ -82,70 +82,15 @@
                         android:textSize="15sp"/>
             </LinearLayout>
 <!--nota numero 2-->
-                <LinearLayout
-                 android:layout_width="wrap_content"
-                 android:layout_height="wrap_content"
-                 android:orientation="horizontal">
-
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:text="Nota Corte 2 : "
-                        android:layout_marginTop="10sp"
-                        android:id="@+id/tvNota2"
-                        android:textSize="15sp"
-
-                        android:textColor="@color/negro"/>
-
-                    <TextView
-                     android:layout_width="match_parent"
-                     android:layout_height="wrap_content"
-             android:text="@string/pEmail"
-                        android:textStyle="bold"
-             android:layout_marginTop="10sp"
-             android:id="@+id/tvNotaCorte2"
-             android:textSize="15sp"/>
-         </LinearLayout>
 
 
                 <!--corte numero 3-->
-                <LinearLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal">
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:text="Nota Corte 3 : "
-                        android:layout_marginTop="10sp"
-                        android:id="@+id/tvNota3"
-                        android:textSize="15sp"
-
-                        android:textColor="@color/negro"/>
-
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:text="@string/pEmail"
-                        android:layout_marginTop="10sp"
-                        android:id="@+id/tvNotaCorte3"
-                        android:textStyle="bold"
-                        android:textSize="15sp"/>
-                </LinearLayout>
-
-
-
-
 
 
             </LinearLayout>
 
 
         </LinearLayout>
-
-
-
-
 
 
     </LinearLayout>

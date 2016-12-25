@@ -1,13 +1,11 @@
 package com.example.chino.courselabasico.baseDatos;
 
-import android.content.ContentResolver;
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
-import com.example.chino.courselabasico.pojo.Contacto;
 import com.example.chino.courselabasico.models.*;
 import java.util.ArrayList;
 
@@ -30,7 +28,7 @@ public class BaseDatos extends SQLiteOpenHelper
     public void onCreate(SQLiteDatabase db) {
         //se crea la tabla estudiante
         db.execSQL(DataBaseManager.CREAR_TABLA_MATERIA);
-        db.execSQL(DataBaseManager.NOMBRE_TABLA_PORCENTAJECORTES);
+        db.execSQL(DataBaseManager.CREAR_TABLA_PORCETAJECORTES);
         db.execSQL(DataBaseManager.CREAR_TABLA_CORTEMATERIA);
         db.execSQL(DataBaseManager.CREAR_TABLA_NOTAS);
 
@@ -43,7 +41,7 @@ public class BaseDatos extends SQLiteOpenHelper
         db.execSQL("DROP TABLE IF EXIST " + DataBaseManager.CREAR_TABLA_NOTAS);
         db.execSQL("DROP TABLE IF EXIST " + DataBaseManager.CREAR_TABLA_CORTEMATERIA);
         db.execSQL("DROP TABLE IF EXIST " + DataBaseManager.CREAR_TABLA_MATERIA);
-        db.execSQL("DROP TABLE IF EXIST " + DataBaseManager.NOMBRE_TABLA_PORCENTAJECORTES);
+        db.execSQL("DROP TABLE IF EXIST " + DataBaseManager.CREAR_TABLA_PORCETAJECORTES);
 
         //CREA LA BD
         onCreate(db);
@@ -76,8 +74,12 @@ public class BaseDatos extends SQLiteOpenHelper
                     // obtengo el id de la foto
                     registros.getInt(
                             registros.getColumnIndex(DataBaseManager.MATERIA_FOTO)
+                    ),
+                    // obtengo el id de la foto
+                    registros.getString(
+                            registros.getColumnIndex(DataBaseManager.MATERIA_DEFINITIVA)
                     )
-            ) );
+                    ) );
 
         }
         db.close();

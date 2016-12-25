@@ -7,7 +7,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
 
-    tools:context="com.example.chino.courselabasico.ListaContactos">
+    tools:context="com.example.chino.courselabasico.ListaMaterias">
 
     <!--<ListView-->
 

@@ -42,7 +42,7 @@
     </string-array>
 
 
-    <!--listado de nombres que hay en el activity ListaContactos -->
+    <!--listado de nombres que hay en el activity ListaMaterias -->
     <string name="nombre" translatable="false"> Juan David Redondo</string>
     <string name="telefono" translatable="false"> 3043377736</string>
     <string name="email" translatable="false"> juandredondo@gmail.com</string>

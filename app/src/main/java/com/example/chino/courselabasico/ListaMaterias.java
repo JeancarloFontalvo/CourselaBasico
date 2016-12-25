@@ -8,17 +8,16 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.Toast;
 
 import com.example.chino.courselabasico.adaptador.ContactosAdaptador;
+import com.example.chino.courselabasico.adaptador.MateriasAdaptador;
 import com.example.chino.courselabasico.baseDatos.BaseDatos;
 import com.example.chino.courselabasico.configuracion.Configuracion;
-import com.example.chino.courselabasico.pojo.Contacto;
 import com.example.chino.courselabasico.models.*;
 
 import java.util.ArrayList;
 
-public class ListaContactos extends AppCompatActivity {
+public class ListaMaterias extends AppCompatActivity {
     //coleccion de contactos ;
     ArrayList <Materia>  materias;
     private RecyclerView listaMaterias;
@@ -26,7 +25,7 @@ public class ListaContactos extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_lista_contactos);
+        setContentView(R.layout.activity_lista_materias);
 
         // agregando soporte con java tambien para versiones anteriores
         Toolbar toolbar =(Toolbar) findViewById(R.id.mytoolbar);
@@ -97,7 +96,7 @@ public class ListaContactos extends AppCompatActivity {
     //instancia de contacto adaptador
     public  void inicializarAdaptador()
     {
-        ContactosAdaptador adaptador = new ContactosAdaptador(materias,this);
+        MateriasAdaptador adaptador = new MateriasAdaptador(materias,this);
         listaMaterias.setAdapter(adaptador);
     }
 
@@ -107,7 +106,7 @@ public class ListaContactos extends AppCompatActivity {
         materias        = new ArrayList<Materia>();
 
         // cuando carga el elemento se carga el array list
-        materias        = db.obtenerTodosContactos();
+        materias        = db.getAllMaterias();
 
     }
 

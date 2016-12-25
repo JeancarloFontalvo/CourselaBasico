@@ -28,10 +28,34 @@
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".ListaMaterias" />
+
         </activity>
-        <activity android:name=".ActivityIngresarNotas" />
-        <activity android:name=".About" />
-        <activity android:name=".configuracion.ConfiguracionPorcentajes" />
+
+        <activity android:name=".ActivityIngresarNotas"
+            android:parentActivityName=".ListaMaterias">
+
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".ListaMaterias" />
+
+        </activity>
+        <activity android:name=".About"
+            android:parentActivityName=".ListaMaterias">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".ListaMaterias" />
+        </activity>
+
+        <activity android:name=".ConfiguracionPorcentajes"
+            android:parentActivityName=".ListaMaterias">
+            <meta-data
+            android:name="android.support.PARENT_ACTIVITY"
+            android:value=".ListaMaterias" />
+            />
+        </activity>
+
+
+
         <activity android:name=".Subnotas"></activity>
     </application>
 

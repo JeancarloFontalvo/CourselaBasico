@@ -5,15 +5,18 @@ import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Toast;
 
 import com.example.chino.courselabasico.adaptador.MateriasAdaptador;
 import com.example.chino.courselabasico.baseDatos.BaseDatos;
-import com.example.chino.courselabasico.configuracion.ConfiguracionPorcentajes;
+import com.example.chino.courselabasico.baseDatos.DataBaseManager;
 import com.example.chino.courselabasico.models.*;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 public class ListaMaterias extends AppCompatActivity {
@@ -46,8 +49,9 @@ public class ListaMaterias extends AppCompatActivity {
 //        GridLayoutManager glm = new GridLayoutManager(this,2);
 //        listaContactosCV.setLayoutManager(glm);  // este objeto se comporte como un linear layout
 
-        inicializarListaContactos();
+        inicializarListaMaterias();
         inicializarAdaptador();
+
         // crea la base de daos con la tabla estudiantes
 
        // BaseDatos crearbd = new BaseDatos(this);
@@ -88,7 +92,8 @@ public class ListaMaterias extends AppCompatActivity {
 
         Intent i = new Intent(this,ActivityIngresarNotas.class);
         this.startActivity(i);
-        finish();
+
+
 
     }
 
@@ -99,13 +104,16 @@ public class ListaMaterias extends AppCompatActivity {
         listaMaterias.setAdapter(adaptador);
     }
 
-    public  void inicializarListaContactos()
+    public  void inicializarListaMaterias()
     {
         BaseDatos db    = new BaseDatos(this);
         materias        = new ArrayList<Materia>();
 
         // cuando carga el elemento se carga el array list
         materias        = db.getAllMaterias();
+
+
+
 
     }
 

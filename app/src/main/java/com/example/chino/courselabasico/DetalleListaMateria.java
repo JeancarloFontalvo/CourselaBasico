@@ -36,24 +36,18 @@ public class DetalleListaMateria extends AppCompatActivity {
         String corte2 = parametros.getString("param_corte2");
         String corte3 = parametros.getString("param_corte3");
 
-
         //obteniendo los id de las vistas e ingresandoles los parametros que vienen de la actividad ListaMaterias
         tvNombre = (TextView) findViewById(R.id.tvNombreContacto);
         tvCorte1 = (TextView) findViewById(R.id.tvCorte1);
         tvCorte2 = (TextView) findViewById(R.id.tvCorte2);
         tvCorte3 = (TextView) findViewById(R.id.tvCorte3);
 
-
         // le agrega el nombre de los parametros recibidos  a las vistas para colocarle los diferentes nombres
         tvNombre.setText(nombre);
         tvCorte1.setText(corte1);
         tvCorte2.setText(corte2);
         tvCorte3.setText(corte3);
-
-
-
     }
-
 
     @Override
     public boolean onKeyDown(int keyCode, KeyEvent event) {

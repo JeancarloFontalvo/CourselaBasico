@@ -5,8 +5,13 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.widget.Toast;
 
+import com.example.chino.courselabasico.ListaMaterias;
 import com.example.chino.courselabasico.models.*;
+
+import java.lang.reflect.Array;
+import java.sql.DatabaseMetaData;
 import java.util.ArrayList;
 
 /**
@@ -62,6 +67,7 @@ public class BaseDatos extends SQLiteOpenHelper
         // Recorriendo los registros
         while (registros.moveToNext())
         {
+
             //setea en e campo id
             materias.add( new Materia(
                     // Obtengo el id
@@ -107,7 +113,12 @@ public class BaseDatos extends SQLiteOpenHelper
             porcentajes.add( new Porcentaje(
                     // Obtengo el id
                     registros.getDouble(
-                            registros.getColumnIndex(DataBaseManager.PORCENTAJECORTES_VALOR)
+                            registros.getColumnIndex(DataBaseManager.PORCENTAJECORTES_CORTE1)
+                    )  ,
+                    registros.getDouble(
+                            registros.getColumnIndex(DataBaseManager.PORCENTAJECORTES_CORTE2)
+                    ), registros.getDouble(
+                            registros.getColumnIndex(DataBaseManager.PORCENTAJECORTES_CORTE3)
                     )
             ).setId(
                     registros.getInt(
@@ -120,6 +131,7 @@ public class BaseDatos extends SQLiteOpenHelper
 
         return porcentajes;
     }
+
 
 
     //HACE UNA CONSULTA A LA BASE DE DATOS Y GUARDA LOS DATOS EN UN ARRAY

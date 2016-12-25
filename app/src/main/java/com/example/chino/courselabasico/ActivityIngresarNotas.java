@@ -4,6 +4,7 @@ import android.content.ContentValues;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.Toolbar;
 import android.view.KeyEvent;
 import android.view.View;
 import android.widget.Button;
@@ -42,6 +43,13 @@ public class ActivityIngresarNotas extends AppCompatActivity  {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_ingresar_notas);
+
+        //mostramos la toolbar
+        Toolbar toolbar =(Toolbar) findViewById(R.id.mytoolbar);
+        setSupportActionBar(toolbar);
+
+        //habilitamos la navegacion hacia atras en el tolbar
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
 
 //estableciendo cada variable java a una respectiva vista del layout
@@ -153,12 +161,9 @@ public class ActivityIngresarNotas extends AppCompatActivity  {
     //1. pregunta si se pulso el boton de back
     if(keyCode==KeyEvent.KEYCODE_BACK)
     {
-        //levanta un nuevo intent que llama a la actividad ListaContacto
-        //startActivity( new Intent(DetalleListaMateria.this,ListaMaterias.class))
-
-        finish();
         Intent i = new Intent(this,ListaMaterias.class);
         this.startActivity(i);
+//        finish();
     }
     return super.onKeyDown(keyCode, event);
     }

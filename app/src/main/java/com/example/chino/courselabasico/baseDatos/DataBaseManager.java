@@ -28,7 +28,11 @@ public class DataBaseManager {
 
     public static  final String NOMBRE_TABLA_PORCENTAJECORTES   =   "tbl_porcentajecortes";
     public static  final String PORCENTAJECORTES_ID             =   "corte_id";
-    public static  final String PORCENTAJECORTES_VALOR          =   "valor";
+    public static  final String PORCENTAJECORTES_CORTE1         =   "corte1";
+    public static  final String PORCENTAJECORTES_CORTE2         =   "corte2";
+    public static  final String PORCENTAJECORTES_CORTE3         =   "corte3";
+
+    public static  String restultado[] = new String[9];;
 
 
 
@@ -43,7 +47,9 @@ public class DataBaseManager {
     public static  final String CREAR_TABLA_PORCETAJECORTES=
             "create table " + NOMBRE_TABLA_PORCENTAJECORTES+" ( "+
                     PORCENTAJECORTES_ID     + " INTEGER PRIMARY KEY AUTOINCREMENT,"+
-                    PORCENTAJECORTES_VALOR  + " REAL NOT NULL ); ";
+                    PORCENTAJECORTES_CORTE1 + " REAL NOT NULL, "+
+                    PORCENTAJECORTES_CORTE2 + " REAL NOT NULL,  "+
+                    PORCENTAJECORTES_CORTE3 + " REAL NOT NULL ); ";
 
     public static  final String CREAR_TABLA_CORTEMATERIA=
             "create table " + NOMBRE_TABLA_CORTEMATERIA+" ( "+

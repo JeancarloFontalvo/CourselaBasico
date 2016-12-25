@@ -8,7 +8,7 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
 import com.example.chino.courselabasico.pojo.Contacto;
-
+import com.example.chino.courselabasico.models.*;
 import java.util.ArrayList;
 
 /**
@@ -29,8 +29,10 @@ public class BaseDatos extends SQLiteOpenHelper
     @Override
     public void onCreate(SQLiteDatabase db) {
         //se crea la tabla estudiante
-        db.execSQL(DataBaseManager.CREAR_TABLA_ESTUDIANTE);
-        db.execSQL(DataBaseManager.CREAR_TABLA_CORTES);
+        db.execSQL(DataBaseManager.CREAR_TABLA_MATERIA);
+        db.execSQL(DataBaseManager.NOMBRE_TABLA_PORCENTAJECORTES);
+        db.execSQL(DataBaseManager.CREAR_TABLA_CORTEMATERIA);
+        db.execSQL(DataBaseManager.CREAR_TABLA_NOTAS);
 
     }
 
@@ -38,54 +40,207 @@ public class BaseDatos extends SQLiteOpenHelper
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
         //SI LA TABLA YA ESTA QUE LA BORRE
-        db.execSQL("DROP TABLE IF EXIST "+DataBaseManager.CREAR_TABLA_ESTUDIANTE);
-        db.execSQL("DROP TABLE IF EXIST "+DataBaseManager.CREAR_TABLA_CORTES);
+        db.execSQL("DROP TABLE IF EXIST " + DataBaseManager.CREAR_TABLA_NOTAS);
+        db.execSQL("DROP TABLE IF EXIST " + DataBaseManager.CREAR_TABLA_CORTEMATERIA);
+        db.execSQL("DROP TABLE IF EXIST " + DataBaseManager.CREAR_TABLA_MATERIA);
+        db.execSQL("DROP TABLE IF EXIST " + DataBaseManager.NOMBRE_TABLA_PORCENTAJECORTES);
+
         //CREA LA BD
         onCreate(db);
     }
 
-//HACE UNA CONSULTA A LA BASE DE DATOS Y GUARDA LOS DATOS EN UN ARRAY
-    public ArrayList<Contacto>obtenerTodosContactos(){
-        ArrayList<Contacto>contactos = new ArrayList<>();
-        String query ="SELECT * FROM "+DataBaseManager.NOMBRE_TABLA_ESTUDIANTE;
-        //abriendo la base de datos en forma de lectira
-        SQLiteDatabase db= this.getWritableDatabase();
-        Cursor registros = db.rawQuery(query,null);
+    //HACE UNA CONSULTA A LA BASE DE DATOS Y GUARDA LOS DATOS EN UN ARRAY
+    public ArrayList<Materia> getAllMaterias()
+    {
+        // Arreglo de materias
+        ArrayList<Materia>  materias    = new ArrayList<>();
+        String query                    = "SELECT * FROM " + DataBaseManager.NOMBRE_TABLA_MATERIA;
 
-        //recorriendo los registros
+        // Abriendo la base de datos en forma de lectira
+        SQLiteDatabase db   = this.getWritableDatabase();
+        Cursor registros    = db.rawQuery(query,null);
+
+        // Recorriendo los registros
         while (registros.moveToNext())
         {
-            //objeto de la clase contacto
-            Contacto contactoActual = new Contacto();
             //setea en e campo id
-            contactoActual.setId_contacto(registros .getInt  (0));
-            contactoActual.setNombre(registros     .getString(1));
-            contactoActual.setNotaCorte1(registros .getString(2));
-            contactoActual.setNotaCorte2(registros .getString(3));
-            contactoActual.setNotaCorte3(registros .getString(4));
-            contactoActual.setFoto(registros       .getInt   (5));
-            contactos.add(contactoActual);
+            materias.add( new Materia(
+                    // Obtengo el id
+                    registros.getInt(
+                            registros.getColumnIndex(DataBaseManager.MATERIA_ID)
+                    ),
+                    // Obtengo el nombre
+                    registros.getString(
+                            registros.getColumnIndex(DataBaseManager.MATERIA_NOMBRE_MATERIA)
+                    ),
+                    // obtengo el id de la foto
+                    registros.getInt(
+                            registros.getColumnIndex(DataBaseManager.MATERIA_FOTO)
+                    )
+            ) );
 
         }
         db.close();
 
-
-
-        return contactos;
+        return materias;
     }
-//metodo que inserta UN ESTUDIANTE registros de la bd
-    public  void  insertarContacto(ContentValues contentValues)
+
+
+    //HACE UNA CONSULTA A LA BASE DE DATOS Y GUARDA LOS DATOS EN UN ARRAY
+    public ArrayList<Porcentaje> getAllPorcentajes()
+    {
+        // Arreglo de materias
+        ArrayList<Porcentaje>  porcentajes  = new ArrayList<>();
+        String query                        = "SELECT * FROM " + DataBaseManager.NOMBRE_TABLA_PORCENTAJECORTES;
+
+        // Abriendo la base de datos en forma de lectira
+        SQLiteDatabase db   = this.getWritableDatabase();
+        Cursor registros    = db.rawQuery(query,null);
+
+        // Recorriendo los registros
+        while (registros.moveToNext())
+        {
+            //setea en e campo id
+            porcentajes.add( new Porcentaje(
+                    // Obtengo el id
+                    registros.getDouble(
+                            registros.getColumnIndex(DataBaseManager.PORCENTAJECORTES_VALOR)
+                    )
+            ).setId(
+                    registros.getInt(
+                            registros.getColumnIndex(DataBaseManager.PORCENTAJECORTES_ID)
+                    )
+            ) );
+
+        }
+        db.close();
+
+        return porcentajes;
+    }
+
+
+    //HACE UNA CONSULTA A LA BASE DE DATOS Y GUARDA LOS DATOS EN UN ARRAY
+    public ArrayList<Corte> getAllCortes()
+    {
+        // Arreglo de materias
+        ArrayList<Corte>  cortes        = new ArrayList<>();
+        String query                    = "SELECT * FROM " + DataBaseManager.NOMBRE_TABLA_CORTEMATERIA;
+
+        // Abriendo la base de datos en forma de lectira
+        SQLiteDatabase db   = this.getWritableDatabase();
+        Cursor registros    = db.rawQuery(query,null);
+
+        // Recorriendo los registros
+        while (registros.moveToNext())
+        {
+            //setea en e campo id
+            cortes.add( new Corte(
+                    // Obtengo el id
+                    registros.getDouble(
+                            registros.getColumnIndex(DataBaseManager.CORTEMATERIA_NOTADEFINITIVA)
+                    ),
+                    registros.getDouble(
+                            registros.getColumnIndex(DataBaseManager.CORTEMATERIA_NOTAPARCIAL)
+                    )
+                )
+            );
+
+        }
+        db.close();
+
+        return cortes;
+    }
+
+    //HACE UNA CONSULTA A LA BASE DE DATOS Y GUARDA LOS DATOS EN UN ARRAY
+    public ArrayList<Nota> getAllNotas()
+    {
+        // Arreglo de materias
+        ArrayList<Nota>  notas  = new ArrayList<>();
+        String query            = "SELECT * FROM " + DataBaseManager.NOMBRE_TABLA_NOTA;
+
+        // Abriendo la base de datos en forma de lectira
+        SQLiteDatabase db   = this.getWritableDatabase();
+        Cursor registros    = db.rawQuery(query,null);
+
+        // Recorriendo los registros
+        while (registros.moveToNext())
+        {
+            //setea en e campo id
+            notas.add( new Nota(
+                            // Obtengo el id
+                            registros.getDouble(
+                                    registros.getColumnIndex(DataBaseManager.NOTA_VALOR)
+                            )
+                    )
+            );
+
+        }
+        db.close();
+
+        return notas;
+    }
+
+    //metodo que inserta una materia registros de la bd
+    public  void  addMateria(ContentValues contentValues)
     {
         SQLiteDatabase db = this.getWritableDatabase();
-        db.insert(DataBaseManager.NOMBRE_TABLA_ESTUDIANTE,null,contentValues);
+        db.insert(DataBaseManager.NOMBRE_TABLA_MATERIA, null, contentValues);
+        db.close();
+    }
+
+    public  void  addPorcentajes(ContentValues contentValues)
+    {
+        SQLiteDatabase db = this.getWritableDatabase();
+        db.insert(DataBaseManager.NOMBRE_TABLA_PORCENTAJECORTES, null, contentValues);
+        db.close();
+    }
+
+    public  void  addCortes(ContentValues contentValues)
+    {
+        SQLiteDatabase db = this.getWritableDatabase();
+        db.insert(DataBaseManager.NOMBRE_TABLA_CORTEMATERIA, null, contentValues);
         db.close();
     }
 
     // ESTE METODO DE ESTA CLASE PERMITE GUARDAR DATOS EN LA TABLACORTES
-    public  void  insertarcortes(ContentValues contentValues)
+    public  void  addNotas(ContentValues contentValues)
     {
         SQLiteDatabase db = this.getWritableDatabase();
-        db.insert(DataBaseManager.NOMBRE_TABLA_CORTES,null,contentValues);
+        db.insert(DataBaseManager.NOMBRE_TABLA_NOTA, null, contentValues);
+        db.close();
+    }
+    // - - - - - - - - - - - - - - - - - - - - - -  - - - - - -
+    // - - - - - - ACTUALIZAR  - - - - -  - - - - - -
+    // - - - - - - - - - - - - - - - - - - - - - -  - - - - - -
+
+
+    //metodo que inserta una materia registros de la bd
+    public  void  updateMateria(ContentValues contentValues)
+    {
+        SQLiteDatabase db = this.getWritableDatabase();
+        db.update(DataBaseManager.NOMBRE_TABLA_MATERIA, contentValues, );
+        db.close();
+    }
+
+    public  void  updatePorcentajes(ContentValues contentValues)
+    {
+        SQLiteDatabase db = this.getWritableDatabase();
+        db.update(DataBaseManager.NOMBRE_TABLA_PORCENTAJECORTES, contentValues, );
+        db.close();
+    }
+
+    public  void  updateCortes(ContentValues contentValues)
+    {
+        SQLiteDatabase db = this.getWritableDatabase();
+        db.update(DataBaseManager.NOMBRE_TABLA_CORTEMATERIA, contentValues, );
+        db.close();
+    }
+
+    // ESTE METODO DE ESTA CLASE PERMITE GUARDAR DATOS EN LA TABLACORTES
+    public  void  updateNotas(ContentValues contentValues)
+    {
+        SQLiteDatabase db = this.getWritableDatabase();
+        db.update(DataBaseManager.NOMBRE_TABLA_NOTA, contentValues, "");
         db.close();
     }
 

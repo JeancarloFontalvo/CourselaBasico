@@ -13,14 +13,14 @@ import java.util.concurrent.ScheduledThreadPoolExecutor;
 
 public class Subnotas extends AppCompatActivity {
 
-    LinearLayout linear;
-    EditText etPorcentajeNotas;
-    EditText etPorcentajeParcial;
-    EditText etNotaParcial;
-    Button btnCalcular;
-    Button btnGuardar;
-    Button btnAgregarEditText;
-    Button btnEliminarEditText;
+    LinearLayout    linear;
+    EditText        etPorcentajeNotas;
+    EditText        etPorcentajeParcial;
+    EditText        etNotaParcial;
+    Button          btnCalcular;
+    Button          btnGuardar;
+    Button          btnAgregarEditText;
+    Button          btnEliminarEditText;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,7 +48,12 @@ public class Subnotas extends AppCompatActivity {
     EditText addEditText;
     public  void agregarEdittext(View v)
     {
+        /*
+        EditText note = new EditText(v);
 
+
+        this.linear.addView(  );
+        */
     }
     public  void eliminarEditText(View V){
 

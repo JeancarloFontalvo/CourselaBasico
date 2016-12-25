@@ -16,7 +16,10 @@ public class DataBaseManager {
     public static  final String NOMBRE_TABLA_CORTEMATERIA   =   "tbl_cortemateria";
     public static  final String CORTEMATERIA_ID             =   "cortemateria_id";
     public static  final String CORTEMATERIA_NOTADEFINITIVA =   "cortemateria_notaDefinitiva";
-    public static  final String CORTEMATERIA_NOTAPARCIAL    =   "cortemateria_notaParcial";
+    public static  final String CORTEMATERIA_NOTAPARCIAL        =   "cortemateria_notaParcial";
+    public static  final String CORTEMATERIA_PORCENTAJE         =   "cortemateria_porcentaje";
+    public static  final String CORTEMATERIA_PORCENTAJENOTA     =   "cortemateria_porcentajeNota";
+    public static  final String CORTEMATERIA_PORCENTAJEPARCIAL  =   "cortemateria_porcentajeParcial";
 
     //estas son las constantes de la tabla corteMateria
     public static  final String NOMBRE_TABLA_NOTA           =   "tbl_nota";
@@ -56,12 +59,12 @@ public class DataBaseManager {
                     CORTEMATERIA_ID                 + " INTEGER PRIMARY KEY AUTOINCREMENT,"+
                     CORTEMATERIA_NOTADEFINITIVA     + " REAL NOT NULL, "+
                     CORTEMATERIA_NOTAPARCIAL        + " REAL NOT NULL, "+
+                    CORTEMATERIA_PORCENTAJE         + " REAL NOT NULL, "+
+                    CORTEMATERIA_PORCENTAJENOTA     + " REAL NOT NULL, "+
+                    CORTEMATERIA_PORCENTAJENOTA     + " REAL NOT NULL, "+
                     MATERIA_ID                      + " INTEGER NOT NULL, " +
-                    PORCENTAJECORTES_ID             + " INTEGER NOT NULL, " +
                     " FOREIGN KEY ('" + MATERIA_ID + "') REFERENCES " +
-                    NOMBRE_TABLA_MATERIA + "('" + MATERIA_ID + "'), " +
-                    " FOREIGN KEY ('" + PORCENTAJECORTES_ID + "') REFERENCES " +
-                    NOMBRE_TABLA_PORCENTAJECORTES + "('" + PORCENTAJECORTES_ID + "')  ); ";
+                    NOMBRE_TABLA_MATERIA + "('" + MATERIA_ID + "') on delete cascade on update cascade); " ;
 
     public static  final String CREAR_TABLA_NOTAS=
             "create table " +NOMBRE_TABLA_NOTA+" ( "+
@@ -69,7 +72,7 @@ public class DataBaseManager {
                     NOTA_VALOR          + " REAL NOT NULL, "+
                     CORTEMATERIA_ID     + " INTEGER NOT NULL, "+
                     " FOREIGN KEY ('" + CORTEMATERIA_ID + "') REFERENCES " +
-                    NOMBRE_TABLA_CORTEMATERIA + "('" + CORTEMATERIA_ID + "')  ); ";
+                    NOMBRE_TABLA_CORTEMATERIA + "('" + CORTEMATERIA_ID + "') on delete cascade on update cascade  ); ";
 
 
 }

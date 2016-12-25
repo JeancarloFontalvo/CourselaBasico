@@ -1,5 +1,6 @@
 package com.example.chino.courselabasico;
 
+import android.content.Intent;
 import android.graphics.Color;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AlertDialog;
@@ -19,6 +20,8 @@ import org.w3c.dom.Text;
 
 import java.util.*;
 import java.util.concurrent.ScheduledThreadPoolExecutor;
+import com.example.chino.courselabasico.models.Corte;
+import com.example.chino.courselabasico.models.Nota;
 
 public class Subnotas extends AppCompatActivity implements View.OnClickListener {
 
@@ -37,8 +40,8 @@ public class Subnotas extends AppCompatActivity implements View.OnClickListener 
     EditText    addEditText;
 
     // Notes List
-    ArrayList<EditText> subNotes = new ArrayList<EditText>();
-
+    ArrayList<EditText> subNotesEditText    = new ArrayList<EditText>();
+    ArrayList<Nota>     notas               = new ArrayList<>();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -84,30 +87,30 @@ public class Subnotas extends AppCompatActivity implements View.OnClickListener 
         for(int i = 0; i < count; i++)
         {
             v = (EditText) this.subNotasGroup.getChildAt(i);
-            this.subNotes.add( v );
+            this.subNotesEditText.add( v );
         }
     }
 
     public  void agregarEdittext(View v)
     {
-        int count           = this.subNotes.size();
+        int count           = this.subNotesEditText.size();
         EditText editText   = new EditText(v.getContext());
                  editText.setId( count + 1 );
                  editText.setSingleLine();
                  editText.setRawInputType(InputType.TYPE_CLASS_NUMBER | InputType.TYPE_NUMBER_FLAG_DECIMAL);
                  editText.setHint( "Nota " + String.valueOf( count + 1 ) );
-        this.subNotes.add( editText );
+        this.subNotesEditText.add( editText );
 
         this.subNotasGroup.addView( editText );
     }
 
     public  void eliminarEditText(View V){
 
-        int count           = this.subNotes.size();
+        int count           = this.subNotesEditText.size();
         if(count > 1)
         {
             this.subNotasGroup.removeViewAt( count - 1 );
-            this.subNotes.remove( count - 1 );
+            this.subNotesEditText.remove( count - 1 );
         }
 
     }
@@ -120,7 +123,7 @@ public class Subnotas extends AppCompatActivity implements View.OnClickListener 
         switch (id)
         {
             case R.id.btnGuardarSubNotas:
-                    if(this.saveHandle() > -1)
+                    if(this.saveHandler() > -1)
                         this.etPorcentajeNotas.setTextColor(Color.GREEN);
                 break;
 
@@ -175,20 +178,28 @@ public class Subnotas extends AppCompatActivity implements View.OnClickListener 
         return notaDefinitiva;
     }
 
-    private int saveHandle() {
-        throw new UnsupportedOperationException("Aun no se puede guardar");
+    private int saveHandler() {
+        throw new UnsupportedOperationException("Aun no se puede guardar");  //llamando a el activity de detalles y se le mandan por parametros los textos
+//        Intent i = new Intent(this,DetalleListaMateria.class);
+//
+//        i.putExtra("param_notadefinitiva",tvResult.getText());
+//
+////                i.putExtra("param_corte2",Materia.getNotaCorte2());
+////                i.putExtra("param_corte3",Materia.getNotaCorte3());
+//
+//        this.startActivity(i);
     }
 
     private List<Double> getNotes() {
 
         List<Double>    notas = new ArrayList<>();
-        int             count = this.subNotes.size();
+        int             count = this.subNotesEditText.size();
 
         for (int i = 0; i < count; i++)
         {
             notas.add(
                     Double.valueOf(
-                            this.subNotes.get( i )
+                            this.subNotesEditText.get( i )
                                             .getText()
                                                 .toString()
                     )
@@ -223,7 +234,7 @@ public class Subnotas extends AppCompatActivity implements View.OnClickListener 
                 &&
                 this.filled( this.etNotaParcial, "Ingresa por favor la nota del parcial" )
                 &&
-                this.filled( this.subNotes, "Ingresa todas las notas por favor");
+                this.filled( this.subNotesEditText, "Ingresa todas las notas por favor");
 
     }
     private boolean filled(EditText field, String Message)

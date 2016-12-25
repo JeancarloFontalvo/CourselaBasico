@@ -21,7 +21,7 @@
 
         <!-- agregando la navegacion hacia atras en androis -->
         <activity
-            android:name=".DetalleListaContacto"
+            android:name=".DetalleListaMateria"
             android:parentActivityName=".ListaContactos">
 
             <!-- soporte para versiones menores a lolliopop -->

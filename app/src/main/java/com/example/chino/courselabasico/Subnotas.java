@@ -11,8 +11,15 @@ import android.widget.Toast;
 
 import java.util.concurrent.ScheduledThreadPoolExecutor;
 
-public class Subnotas extends AppCompatActivity {
-
+/**
+ * @name    SubNotasActivity
+ * @author  Jeancarlo Fontalvo
+ * @since   1.0
+ * @description La actividad para las subnotas
+ */
+public class Subnotas extends AppCompatActivity
+{
+    //Array Notes
     LinearLayout    linear;
     EditText        etPorcentajeNotas;
     EditText        etPorcentajeParcial;

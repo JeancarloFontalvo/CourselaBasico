@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
 
     android:orientation="vertical"
-    tools:context="com.example.chino.courselabasico.DetalleListaContacto">
+    tools:context="com.example.chino.courselabasico.DetalleListaMateria">
 
     <include
         android:id="@+id/mytoolbar"

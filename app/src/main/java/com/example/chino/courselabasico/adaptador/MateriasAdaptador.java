@@ -13,7 +13,6 @@ import android.widget.Toast;
 
 import com.example.chino.courselabasico.DetalleListaMateria;
 import com.example.chino.courselabasico.R;
-import com.example.chino.courselabasico.pojo.Materia;
 import com.example.chino.courselabasico.models.*;
 
 import java.util.ArrayList;
@@ -24,10 +23,9 @@ import java.util.ArrayList;
  *
  */
 
-public class MateriasAdaptador extends RecyclerView.Adapter<MateriasAdaptador.ConntactoViewHolder>{
+public class MateriasAdaptador extends RecyclerView.Adapter<MateriasAdaptador.MateriaViewHolder>{
     ArrayList <Materia> materias;
-
-    Activity activity;
+    Activity            activity;
 
     //creando un costructor de la claseMateriaAdaptadror
 
@@ -40,26 +38,26 @@ public class MateriasAdaptador extends RecyclerView.Adapter<MateriasAdaptador.Co
     //Infla el layout card_videMateria y lo pasara al view holder para que obtenga los view
     //asocisa cada elemento de la lista con cada view
     @Override
-    public ConntactoViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+    public MateriaViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         //le da vida al layout, ES DE CIR INFlar en layout para que se vea como una vista, la idea es asodical cardViewMateria al recycler view
 
-        View v= LayoutInflater.from(parent.getContext()).inflate(R.layout.cardview_Materia,parent,false);
+        View v= LayoutInflater.from(parent.getContext()).inflate(R.layout.cardview_materia, parent, false);
 
-        return  new ConntactoViewHolder(v);
+        return  new MateriaViewHolder(v);
     }
 
     //le manda la lista de materias a cada elementoConntactoViewHolder
 
     @Override
-    public void onBindViewHolder(ConntactoViewHolder Materia_ViewHolder, int position) {
+    public void onBindViewHolder(MateriaViewHolder Materia_ViewHolder, int position) {
         // a traves del objeto Materia accede a los elemntos del array Materia
-        final Materia Materia= materias.get(position);
-        Materia_ViewHolder.imgFoto.setImageResource(Materia.getFoto());
+        final Materia Materia = materias.get(position);
+        Materia_ViewHolder.imgFoto.setImageResource(Materia.getImagenId());
         Materia_ViewHolder.tvNombreCv.setText(Materia.getNombre());
 
-        Materia_ViewHolder.tvCorte1.setText(Materia.getNotaCorte1());
+        /*Materia_ViewHolder.tvCorte1.setText(Materia.getNotaCorte1());
         Materia_ViewHolder.tvCorte2.setText(Materia.getNotaCorte2());
-        Materia_ViewHolder.tvCorte3.setText(Materia.getNotaCorte3());
+        Materia_ViewHolder.tvCorte3.setText(Materia.getNotaCorte3());*/
 
 
 
@@ -74,9 +72,9 @@ public class MateriasAdaptador extends RecyclerView.Adapter<MateriasAdaptador.Co
                 Intent i = new Intent(activity,DetalleListaMateria.class);
 
                 i.putExtra("param_Nombre",Materia.getNombre());
-                i.putExtra("param_corte1",Materia.getNotaCorte1());
+                /*i.putExtra("param_corte1",Materia.getNotaCorte1());
                 i.putExtra("param_corte2",Materia.getNotaCorte2());
-                i.putExtra("param_corte3",Materia.getNotaCorte3());
+                i.putExtra("param_corte3",Materia.getNotaCorte3());*/
 
                 activity.startActivity(i);
             }
@@ -98,26 +96,27 @@ public class MateriasAdaptador extends RecyclerView.Adapter<MateriasAdaptador.Co
     public int getItemCount() {
         return materias.size();
     }
-//  en esta clase se da la logica de darle vida a los views para que se muestren en una pantalla activa
 
-    public static class ConntactoViewHolder extends RecyclerView.ViewHolder
+
+    //  en esta clase se da la logica de darle vida a los views para que se muestren en una pantalla activa
+    public static class MateriaViewHolder extends RecyclerView.ViewHolder
     {
 
         // se definen todos los views que estan en el archivo cardViewMateria.xml estas variables deben de concordar con las vistas respectivas
 
-        private ImageView imgFoto;
-        private TextView tvNombreCv,tvCorte1,tvCorte2,tvCorte3;
+        private ImageView   imgFoto;
+        private TextView    tvNombreCv, tvCorte3;
 
 
-        public ConntactoViewHolder(View itemView) {
+        public MateriaViewHolder(View itemView) {
             super(itemView);
             //asociando los objetos con el respectivi vew
-            imgFoto=(ImageView)itemView.findViewById(R.id.imgFoto);
-            tvNombreCv=(TextView)itemView.findViewById(R.id.tvNombreCv);
+            imgFoto     =(ImageView)itemView.findViewById(R.id.imgFoto);
+            tvNombreCv  =(TextView) itemView.findViewById(R.id.tvNombreCv);
 
-            tvCorte1=(TextView)itemView.findViewById(R.id.tvNotaCorte1);
+            /*tvCorte1=(TextView)itemView.findViewById(R.id.tvNotaCorte1);
             tvCorte2=(TextView) itemView.findViewById(R.id.tvNotaCorte2);
-            tvCorte3=(TextView) itemView.findViewById(R.id.tvNotaCorte3);
+            tvCorte3=(TextView) itemView.findViewById(R.id.tvNotaCorte3);*/
         }
     }
 

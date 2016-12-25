@@ -161,7 +161,7 @@ public class ActivityIngresarNotas extends AppCompatActivity  {
     if(keyCode==KeyEvent.KEYCODE_BACK)
     {
         //levanta un nuevo intent que llama a la actividad ListaContacto
-        //startActivity( new Intent(DetalleListaContacto.this,ListaContactos.class))
+        //startActivity( new Intent(DetalleListaMateria.this,ListaContactos.class))
 
         finish();
         Intent i = new Intent(this,ListaContactos.class);
@@ -175,23 +175,28 @@ public class ActivityIngresarNotas extends AppCompatActivity  {
     //se ejecuta esta funcion cuando el usuario pulsa el boton guardar
     public  void  insertarNotas(View v ){
         BaseDatos db = new BaseDatos(this);
-        insertarContactos(db);
+        insertarMaterias(db);
     }
     ///////////////////////////////////////////////////////////////////////////////////////////////////
-    public  void insertarContactos(BaseDatos db)
+    public  void insertarMateria(BaseDatos db)
     {
-        String NombreMat=tvNombreMateria.getText().toString();
-        String corte1=etNumero1.getText().toString();
-        String corte2=etNumero2.getText().toString();
-        String corte3=etNumero3.getText().toString();
+        String  NombreMat       =   tvNombreMateria .getText().toString();
+        String  corte1          =   etNumero1       .getText().toString();
+        String  corte2          =   etNumero2       .getText().toString();
+        String  corte3          =   etNumero3       .getText().toString();
 
-        String Nota=resultadoParaGuardar;
+        String  Nota            =   resultadoParaGuardar;
 
         ContentValues contentValues = new ContentValues();
-        contentValues.put(DataBaseManager.ESTUDIANTE_NOMBRE_MATERIA,NombreMat);
-        contentValues.put(DataBaseManager.ESTUDIANTE_NOTA_CORTE1,corte1);
-        contentValues.put(DataBaseManager.ESTUDIANTE_NOTA_CORTE2,corte2);
-        contentValues.put(DataBaseManager.ESTUDIANTE_NOTA_CORTE3,corte3);
+        contentValues.put(DataBaseManager.MATERIA_NOMBRE_MATERIA,NombreMat);
+
+        db.add(
+                DataBaseManager.CREAR_TABLA_CORTEMATERIA,
+                new ContentValues(){
+
+                }
+        )
+
         contentValues.put(DataBaseManager.ESTUDIANTE_FOTO,CARITA_MOTICON);
 
         db.insertarContacto(contentValues);

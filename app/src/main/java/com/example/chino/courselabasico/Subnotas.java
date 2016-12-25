@@ -1,19 +1,29 @@
 package com.example.chino.courselabasico;
 
+import android.graphics.Color;
+import android.support.v7.app.ActionBar;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.text.InputType;
 import android.text.Layout;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 import android.widget.Toast;
 
+import org.w3c.dom.Text;
+
+import java.util.*;
 import java.util.concurrent.ScheduledThreadPoolExecutor;
 
-public class Subnotas extends AppCompatActivity {
+public class Subnotas extends AppCompatActivity implements View.OnClickListener {
 
-    LinearLayout    linear;
+    LinearLayout    subNotasGroup;
+
     EditText        etPorcentajeNotas;
     EditText        etPorcentajeParcial;
     EditText        etNotaParcial;
@@ -21,43 +31,227 @@ public class Subnotas extends AppCompatActivity {
     Button          btnGuardar;
     Button          btnAgregarEditText;
     Button          btnEliminarEditText;
+    TextView        tvResult;
+
+    int         contador    =   0;
+    EditText    addEditText;
+
+    // Notes List
+    ArrayList<EditText> subNotes = new ArrayList<EditText>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_subnotas);
+        this.init();
+    }
 
+    private void init()
+    {
         //seteando los respectivos controles
-//        layout=(Layout)findViewById(R.id.layoutEtDinamicos);
-        etPorcentajeNotas = (EditText)findViewById(R.id.etPorcentajeNotas);
-        etPorcentajeParcial = (EditText)findViewById(R.id.etPorcentajeParcial);
-        etNotaParcial = (EditText)findViewById(R.id.etPorcentajeParcial);
+        //layout=(Layout)findViewById(R.id.layoutEtDinamicos);
+        etPorcentajeNotas   =   (EditText)findViewById(R.id.etPorcentajeNotas);
+        etPorcentajeNotas.setText( "50" );
+        etPorcentajeParcial =   (EditText)findViewById(R.id.etPorcentajeParcial);
+        etPorcentajeParcial.setText( "50" );
+        etNotaParcial       =   (EditText)findViewById(R.id.etNotaParcial);
 
-        btnCalcular =(Button) findViewById( R.id.btnCalcularSubNotas);
-        btnGuardar  =(Button) findViewById(R.id.btnGuardarSubNotas);
+        // Nota final (resultado)
+        tvResult            =   (TextView)findViewById(R.id.tvResul);
+
+        // botones de crud
+        btnCalcular         =   (Button) findViewById( R.id.btnCalcularSubNotas);
+        btnCalcular.setOnClickListener( this );
+
+        btnGuardar          =   (Button) findViewById(R.id.btnGuardarSubNotas);
+        btnGuardar.setOnClickListener( this );
 
         //botones de agregado dinamico de edittext
-        btnAgregarEditText =( Button) findViewById(R.id.btnAgregarEditText);
-        btnEliminarEditText =( Button) findViewById(R.id.btnEliminarEditText);
+        btnAgregarEditText  =   ( Button) findViewById(R.id.btnAgregarEditText);
+        btnEliminarEditText =   ( Button) findViewById(R.id.btnEliminarEditText);
 
-        linear=(LinearLayout)findViewById(R.id.linearLayoutEtDinamicos);
+        // Seccion de subnotas
+        subNotasGroup       =   (LinearLayout)findViewById(R.id.linearLayoutEtDinamicos);
 
-
+        this.registerEditText();
     }
-    int contador=0;
-    EditText addEditText;
+
+    private void registerEditText()
+    {
+        int         count   = this.subNotasGroup.getChildCount();
+        EditText    v       = null;
+
+        for(int i = 0; i < count; i++)
+        {
+            v = (EditText) this.subNotasGroup.getChildAt(i);
+            this.subNotes.add( v );
+        }
+    }
+
     public  void agregarEdittext(View v)
     {
-        /*
-        EditText note = new EditText(v);
+        int count           = this.subNotes.size();
+        EditText editText   = new EditText(v.getContext());
+                 editText.setId( count + 1 );
+                 editText.setSingleLine();
+                 editText.setRawInputType(InputType.TYPE_CLASS_NUMBER | InputType.TYPE_NUMBER_FLAG_DECIMAL);
+                 editText.setHint( "Nota " + String.valueOf( count + 1 ) );
+        this.subNotes.add( editText );
 
-
-        this.linear.addView(  );
-        */
+        this.subNotasGroup.addView( editText );
     }
+
     public  void eliminarEditText(View V){
 
+        int count           = this.subNotes.size();
+        if(count > 1)
+        {
+            this.subNotasGroup.removeViewAt( count - 1 );
+            this.subNotes.remove( count - 1 );
+        }
 
-}
+    }
 
+
+    @Override
+    public void onClick(View v)
+    {
+        int id = v.getId();
+        switch (id)
+        {
+            case R.id.btnGuardarSubNotas:
+                    if(this.saveHandle() > -1)
+                        this.etPorcentajeNotas.setTextColor(Color.GREEN);
+                break;
+
+            case R.id.btnCalcularSubNotas:
+                    // Checkeamos si los campos estan llenos
+                    if( this.allFilledFields() )
+                    // Si estan llenos, los calculamos
+                    this.tvResult.setText( String.valueOf( this.calculateHandler() ) );
+                break;
+        }
+    }
+
+    private double calculateHandler()
+    {
+        // 1. Array de porcentages
+        // ej. [ 20%, 30% ]
+        double[] porcentages = new double[]{
+                Double.valueOf( this.etPorcentajeParcial.getText().toString() ),
+                Double.valueOf( this.etPorcentajeNotas.getText().toString() ),
+        };
+        // - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+        // Nota definitiva, ej. 4.5
+        double                          notaDefinitiva  = 0;
+        // - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+        // Notas tanto subnotas como la nota del parcial, donde 0 es la nota del parcial y 1 la demas notas
+        /*
+            ej.
+            [
+                0 => [ 5.0 ],
+                1 => [ 3.2, 5.0, 5 ]
+            ]
+         */
+        HashMap<Integer, List<Double>>  notas           = getNotesHash();
+
+        // - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+        // Calculo de las notas :v
+        for(int i = 0; i < porcentages.length; i++)
+        {
+            double          notaPorcetual   = 0;
+            List<Double>    notitas         = notas.get( i );
+
+            for (double notita : notitas) {
+                notaPorcetual += notita;
+            }
+            notaPorcetual   /= notitas.size();
+            notaPorcetual   *= porcentages[ i ] / 100;
+            notaDefinitiva  += notaPorcetual;
+
+        }
+        // retornamos la nota calculada
+        return notaDefinitiva;
+    }
+
+    private int saveHandle() {
+        throw new UnsupportedOperationException("Aun no se puede guardar");
+    }
+
+    private List<Double> getNotes() {
+
+        List<Double>    notas = new ArrayList<>();
+        int             count = this.subNotes.size();
+
+        for (int i = 0; i < count; i++)
+        {
+            notas.add(
+                    Double.valueOf(
+                            this.subNotes.get( i )
+                                            .getText()
+                                                .toString()
+                    )
+            );
+        }
+
+        return notas;
+    }
+
+    private HashMap<Integer, List<Double>> getNotesHash()
+    {
+        HashMap<Integer, List<Double>> notesHash = new HashMap<>();
+
+        // 1. Nota del parcial
+        notesHash.put(0, Arrays.asList( Double.valueOf( this.etNotaParcial.getText().toString() ) ) );
+
+        // 2. Notas restantes
+        notesHash.put(1, this.getNotes() );
+
+        return notesHash;
+    }
+
+
+    // Validation functions
+    // -------------------------------------------------
+    private boolean allFilledFields()
+    {
+        return
+                this.filled( this.etPorcentajeNotas, "Ingresa por favor el porcetaje de las notas" )
+                &&
+                this.filled( this.etPorcentajeParcial, "Ingresa por favor del parcial" )
+                &&
+                this.filled( this.etNotaParcial, "Ingresa por favor la nota del parcial" )
+                &&
+                this.filled( this.subNotes, "Ingresa todas las notas por favor");
+
+    }
+    private boolean filled(EditText field, String Message)
+    {
+        boolean result = true;
+
+        if(field.getText().toString().equals( "" ))
+        {
+            result = false;
+            field.setError( Message );
+        }
+
+        return result;
+    }
+
+    private boolean filled(ArrayList<EditText> fields, String Message)
+    {
+        boolean result = true;
+
+        for( EditText field : fields )
+        {
+            if(field.getText().toString().equals( "" ))
+            {
+                result = false;
+                field.setError( Message );
+            }
+        }
+
+        return  result;
+    }
 }

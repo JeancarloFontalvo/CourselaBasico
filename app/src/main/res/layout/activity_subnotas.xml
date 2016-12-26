@@ -276,12 +276,7 @@
                 android:id="@+id/debug"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
-                <TextView
-                    android:id="@+id/debugData"
-                    android:layout_width="match_parent"
-                    android:layout_height="200px">
 
-                </TextView>
             </LinearLayout>
 
         </LinearLayout>

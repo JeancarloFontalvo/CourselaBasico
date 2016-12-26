@@ -298,25 +298,33 @@ public class Subnotas extends AppCompatActivity implements View.OnClickListener 
 
     private ArrayList<EditText> getNotes(Context context, List<Nota> notas) {
 
-        int count   = this.notas.size();
+        int count   = notas.size();
         int countS  = 0;
         for (int i = 0; i < count; i++)
         {
             countS  = this.subNotesEditText.size();
 
-            EditText editText   = new EditText(context);
+            if(i == 1)
+            {
+                this.subNotesEditText.get( 0 ).setText( String.valueOf( notas.get( i ).getValor() ) );
+            }
+            else
+            {
+                EditText editText   = new EditText(context);
 
-            editText.setId( countS + 1 );
-            editText.setSingleLine();
-            editText.setText( String.valueOf( this.notas.get( i ).getValor() ) );
+                editText.setId( countS + 1 );
+                editText.setSingleLine();
+                editText.setText( String.valueOf( notas.get( i ).getValor() ) );
 
-            editText.setRawInputType(InputType.TYPE_CLASS_NUMBER | InputType.TYPE_NUMBER_FLAG_DECIMAL);
+                editText.setRawInputType(InputType.TYPE_CLASS_NUMBER | InputType.TYPE_NUMBER_FLAG_DECIMAL);
 
-            editText.setHint( "Nota " + String.valueOf( countS + 1 ) );
+                editText.setHint( "Nota " + String.valueOf( countS + 1 ) );
 
-            this.subNotesEditText.add( editText );
+                this.subNotesEditText.add( editText );
 
-            this.subNotasGroup.addView( editText );
+                this.subNotasGroup.addView( editText );
+            }
+
         }
 
         return this.subNotesEditText;

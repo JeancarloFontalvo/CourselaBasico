@@ -262,6 +262,9 @@ public class ActivityIngresarNotas extends AppCompatActivity  {
         db.add(DataBaseManager.NOMBRE_TABLA_MATERIA,contentValues);
         Toast.makeText(this, "Se Guardo las notas de la Asignatura"+NombreMat, Toast.LENGTH_SHORT).show();
         //cierra la actividad en curso
+
+        Materia.resetCortes();
+        
         finish();
         //  llama a la actividad en donde esta el recycler view
         Intent i = new Intent(this,ListaMaterias.class);

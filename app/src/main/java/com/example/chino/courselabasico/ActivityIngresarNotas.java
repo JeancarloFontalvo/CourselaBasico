@@ -257,6 +257,13 @@ public class ActivityIngresarNotas extends AppCompatActivity  {
         ContentValues contentValues = new ContentValues();
         contentValues.put(DataBaseManager.MATERIA_NOMBRE_MATERIA,NombreMat);
         contentValues.put(DataBaseManager.MATERIA_DEFINITIVA,Nota);
+        contentValues.put(DataBaseManager.MATERIA_CORTE1,           Materia.corte1.getNotaDefinitiva());
+        contentValues.put(DataBaseManager.MATERIA_CORTE1_PARCIAL,   Materia.corte1.getNotaParcial());
+        contentValues.put(DataBaseManager.MATERIA_CORTE1_SUBNOTA,   Materia.corte1.getNotas()  );
+        contentValues.put(DataBaseManager.MATERIA_DEFINITIVA,Nota);
+        contentValues.put(DataBaseManager.MATERIA_DEFINITIVA,Nota);
+        contentValues.put(DataBaseManager.MATERIA_DEFINITIVA,Nota);
+        contentValues.put(DataBaseManager.MATERIA_DEFINITIVA,Nota);
         contentValues.put(DataBaseManager.MATERIA_FOTO,CARITA_MOTICON);
 
         db.add(DataBaseManager.NOMBRE_TABLA_MATERIA,contentValues);
@@ -264,7 +271,7 @@ public class ActivityIngresarNotas extends AppCompatActivity  {
         //cierra la actividad en curso
 
         Materia.resetCortes();
-        
+
         finish();
         //  llama a la actividad en donde esta el recycler view
         Intent i = new Intent(this,ListaMaterias.class);

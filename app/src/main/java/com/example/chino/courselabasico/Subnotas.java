@@ -1,5 +1,6 @@
 package com.example.chino.courselabasico;
 
+import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
 import android.support.v7.app.ActionBar;
@@ -63,6 +64,9 @@ public class Subnotas extends AppCompatActivity implements View.OnClickListener 
         this.corteId = i.getIntExtra( "corteId", 0 );
 
         this.init();
+
+        if( this.corteId > 0 )
+            initWithData();
     }
 
     private void init()
@@ -93,6 +97,18 @@ public class Subnotas extends AppCompatActivity implements View.OnClickListener 
         subNotasGroup       =   (LinearLayout)findViewById(R.id.linearLayoutEtDinamicos);
 
         this.registerEditText();
+    }
+
+    public void initWithData()
+    {
+        Corte corte =  Materia.getCorte( Integer.valueOf( String.valueOf(this.corteId) ) );
+        if( corte.getId() > 0 && corte.tieneDatos())
+        {
+            etPorcentajeNotas   .setText( String.valueOf( corte.getPorcentajeNota() ) );
+            etPorcentajeParcial .setText( String.valueOf( corte.getPorcentajeParcial() ) );
+            etNotaParcial       .setText( String.valueOf( corte.getNotaParcial() ) );
+            getNotes(this, corte.getNotas());
+        }
     }
 
     private void registerEditText()
@@ -148,7 +164,7 @@ public class Subnotas extends AppCompatActivity implements View.OnClickListener 
                     // Si estan llenos, los calculamos
                     if( this.allFilledFields() )
                     {
-                        this.tvResult.setText( String.valueOf( this.calculateHandler() ) );
+                        this.tvResult.setText( String.format("%.2f", this.calculateHandler() )  );
                         this.btnGuardar.setEnabled(true);
                     }
                 break;
@@ -210,6 +226,7 @@ public class Subnotas extends AppCompatActivity implements View.OnClickListener 
 
         cortecito.setContext(this);
 
+        cortecito.tieneDetalle = true;
         cortecito.setId( this.corteId )
                 .setPorcentajeParcial  ( Double.valueOf( this.etPorcentajeParcial.getText().toString() ) )
                 .setPorcentajeNota     ( Double.valueOf( this.etPorcentajeNotas.getText().toString() ) );
@@ -230,17 +247,22 @@ public class Subnotas extends AppCompatActivity implements View.OnClickListener 
             i++;
         }
 
+
+
         switch (String.valueOf(this.corteId))
         {
             case "1":
+                    cortecito.setId( 1 );
                     Materia.corte1 = cortecito;
                 break;
 
             case "2":
+                    cortecito.setId( 2 );
                     Materia.corte2 = cortecito;
                 break;
 
             case "3":
+                    cortecito.setId( 3 );
                     Materia.corte3 = cortecito;
                 break;
         }
@@ -272,6 +294,32 @@ public class Subnotas extends AppCompatActivity implements View.OnClickListener 
         }
 
         return notas;
+    }
+
+    private ArrayList<EditText> getNotes(Context context, List<Nota> notas) {
+
+        int count   = this.notas.size();
+        int countS  = 0;
+        for (int i = 0; i < count; i++)
+        {
+            countS  = this.subNotesEditText.size();
+
+            EditText editText   = new EditText(context);
+
+            editText.setId( countS + 1 );
+            editText.setSingleLine();
+            editText.setText( String.valueOf( this.notas.get( i ).getValor() ) );
+
+            editText.setRawInputType(InputType.TYPE_CLASS_NUMBER | InputType.TYPE_NUMBER_FLAG_DECIMAL);
+
+            editText.setHint( "Nota " + String.valueOf( countS + 1 ) );
+
+            this.subNotesEditText.add( editText );
+
+            this.subNotasGroup.addView( editText );
+        }
+
+        return this.subNotesEditText;
     }
 
     private HashMap<Integer, List<Double>> getNotesHash()

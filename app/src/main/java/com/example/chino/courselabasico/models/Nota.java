@@ -61,4 +61,10 @@ public class Nota extends ModelDB implements Serializable
         this.columnsData.put(DataBaseManager.NOTA_VALOR, String.valueOf(this.valor) );
         this.columnsData.put(DataBaseManager.CORTEMATERIA_ID, String.valueOf(this.corteId) );
     }
+
+    @Override
+    public String toString()
+    {
+        return String.valueOf(this.valor);
+    }
 }

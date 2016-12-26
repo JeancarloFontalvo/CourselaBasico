@@ -13,10 +13,10 @@ public class DataBaseManager {
     public static  final String MATERIA_CORTE1          =   "materia_corte1";
     public static  final String MATERIA_CORTE1_PARCIAL  =   "materia_corte1_parcial";
     public static  final String MATERIA_CORTE1_SUBNOTA  =   "materia_corte1_subnota";
-    public static  final String MATERIA_CORTE2          =   "materia_foto";
+    public static  final String MATERIA_CORTE2          =   "materia_corte2";
     public static  final String MATERIA_CORTE2_PARCIAL  =   "materia_corte2_parcial";
     public static  final String MATERIA_CORTE2_SUBNOTA  =   "materia_corte2_subnota";
-    public static  final String MATERIA_CORTE3          =   "materia_foto";
+    public static  final String MATERIA_CORTE3          =   "materia_corte3";
     public static  final String MATERIA_CORTE3_PARCIAL  =   "materia_corte3_parcial";
     public static  final String MATERIA_CORTE3_SUBNOTA  =   "materia_corte3_subnota";
     public static  final String MATERIA_DEFINITIVA      =   "materia_definitiva";
@@ -57,10 +57,10 @@ public class DataBaseManager {
                     MATERIA_CORTE3     + " REAL  , " +
                     MATERIA_CORTE1_PARCIAL     + " REAL  , " +
                     MATERIA_CORTE2_PARCIAL     + " REAL  , " +
-                    MATERIA_CORTE2_PARCIAL     + " REAL  , " +
-                    MATERIA_CORTE1_SUBNOTA     + " REAL  , " +
-                    MATERIA_CORTE2_SUBNOTA     + " REAL  , " +
-                    MATERIA_CORTE3_SUBNOTA     + " REAL  , " +
+                    MATERIA_CORTE3_PARCIAL     + " REAL  , " +
+                    MATERIA_CORTE1_SUBNOTA     + " VARCHAR(100)  , " +
+                    MATERIA_CORTE2_SUBNOTA     + " VARCHAR(100)  , " +
+                    MATERIA_CORTE3_SUBNOTA     + " VARCHAR(100)  , " +
                     MATERIA_DEFINITIVA     + " REAL  , " +
                     MATERIA_FOTO           + " INTEGER NOT NULL"+");";
 
@@ -78,7 +78,6 @@ public class DataBaseManager {
                     CORTEMATERIA_NOTAPARCIAL        + " REAL NOT NULL, "+
                     CORTEMATERIA_PORCENTAJE         + " REAL NOT NULL, "+
                     CORTEMATERIA_PORCENTAJENOTA     + " REAL NOT NULL, "+
-                    CORTEMATERIA_PORCENTAJENOTA     + " REAL NOT NULL, "+
                     MATERIA_ID                      + " INTEGER NOT NULL, " +
                     " FOREIGN KEY ('" + MATERIA_ID + "') REFERENCES " +
                     NOMBRE_TABLA_MATERIA + "('" + MATERIA_ID + "') on delete cascade on update cascade); " ;
@@ -90,6 +89,14 @@ public class DataBaseManager {
                     CORTEMATERIA_ID     + " INTEGER NOT NULL, "+
                     " FOREIGN KEY ('" + CORTEMATERIA_ID + "') REFERENCES " +
                     NOMBRE_TABLA_CORTEMATERIA + "('" + CORTEMATERIA_ID + "') on delete cascade on update cascade  ); ";
+
+    public static final String CONFIGURE_PORCENTAJES =
+            " INSERT INTO " + NOMBRE_TABLA_PORCENTAJECORTES + "(" +
+                PORCENTAJECORTES_CORTE1 + "," +
+                PORCENTAJECORTES_CORTE2 + "," +
+                PORCENTAJECORTES_CORTE3 +
+            ")" +
+            "VALUES( 20, 30, 50 )";
 
 
 }

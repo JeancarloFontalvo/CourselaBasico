@@ -12,6 +12,10 @@ import android.widget.Toast;
 
 import com.example.chino.courselabasico.baseDatos.BaseDatos;
 import com.example.chino.courselabasico.baseDatos.DataBaseManager;
+import com.example.chino.courselabasico.models.Porcentaje;
+import com.example.chino.courselabasico.models.ShareData;
+
+import java.util.ArrayList;
 
 public class ConfiguracionPorcentajes extends AppCompatActivity {
 
@@ -37,7 +41,23 @@ public class ConfiguracionPorcentajes extends AppCompatActivity {
         tvCorte3 = (TextView) findViewById(R.id.tvPorcentajeCorte3);
         btnGuardar= (Button) findViewById(R.id.btnGuardarCortes);
 
+        init();
+    }
 
+    private void init()
+    {
+        BaseDatos db = new BaseDatos(this);
+        ArrayList<Porcentaje> porcentajes = db.getAllPorcentajes();
+
+        if( porcentajes.size() > 0 )
+        {
+            Porcentaje littlePorcentaje = porcentajes.get( 0 );
+            tvCorte1.setText( String.valueOf( littlePorcentaje.getcorte1() ) );
+            tvCorte2.setText( String.valueOf( littlePorcentaje.getCorte2() ) );
+            tvCorte3.setText( String.valueOf( littlePorcentaje.getCorte3() ) );
+
+            ShareData.put( "porcentajes", littlePorcentaje );
+        }
     }
 
     public  void  insertarCortes(View v ){
@@ -59,13 +79,14 @@ public class ConfiguracionPorcentajes extends AppCompatActivity {
         contentValues.put(DataBaseManager.PORCENTAJECORTES_CORTE3,Corte3);
 
 
-        db.add(DataBaseManager.NOMBRE_TABLA_PORCENTAJECORTES,contentValues);
-        Toast.makeText(this, "Se Guardo con exito ", Toast.LENGTH_SHORT).show();
-        //cierra la actividad en curso
-        finish();
-        //llama a la actividad en donde esta el recycler view
-        Intent i = new Intent(this,ListaMaterias.class);
-        this.startActivity(i);
-
+        if( db.update( DataBaseManager.NOMBRE_TABLA_PORCENTAJECORTES, DataBaseManager.PORCENTAJECORTES_ID, 1 , contentValues) > 0 );
+        {
+            Toast.makeText(this, "Se Guardo con exito ", Toast.LENGTH_SHORT).show();
+            //cierra la actividad en curso
+            finish();
+            //llama a la actividad en donde esta el recycler view
+            Intent i = new Intent(this,ListaMaterias.class);
+            this.startActivity(i);
+        }
     }
 }

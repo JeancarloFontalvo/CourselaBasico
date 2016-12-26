@@ -16,7 +16,32 @@ public class Materia
     public static Corte corte3 = null;
 
 
+    public static Corte getCorte( int id )
+    {
+        Corte cortecito = null;
+        switch (id)
+        {
+            case 1:
+                    corte1      = corte1 == null ? new Corte() : corte1;
+                    corte1.setId( 1 );
+                    cortecito   = corte1;
+                break;
+            
+            case 2:
+                    corte2      = corte2 == null ? new Corte() : corte2;
+                    corte1.setId( 2 );
+                    cortecito   = corte2;
+                break;
+            
+            case 3:
+                    corte3      = corte3 == null ? new Corte() : corte3;
+                    corte1.setId( 3 );
+                    cortecito   = corte3;
+                break;
+        }
 
+        return  cortecito;
+    }
 
     public Materia(int id, String nombre, int imagenId, Double materiaDefinitiva)
     {

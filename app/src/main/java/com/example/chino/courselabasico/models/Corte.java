@@ -20,6 +20,7 @@ public class Corte extends ModelDB implements Serializable
     private double          porcentaje;
     private double          porcentajeParcial;
     private double          porcentajeNota;
+    public  boolean         tieneDetalle = false;
     private ArrayList<Nota> notas;
 
     private static Corte corte = null;
@@ -99,6 +100,7 @@ public class Corte extends ModelDB implements Serializable
     {
         super(context);
         this.notaDefinitiva = 1;
+        this.notas      = new ArrayList<>();
         generateColumns();
     }
 
@@ -108,6 +110,7 @@ public class Corte extends ModelDB implements Serializable
         this.notaDefinitiva = notaDefinitiva;
         this.notaParcial    = notaParcial;
     }
+
 
     public long getId() {
         return id;
@@ -169,6 +172,26 @@ public class Corte extends ModelDB implements Serializable
         this.columnsData.put(DataBaseManager.CORTEMATERIA_PORCENTAJEPARCIAL, String.valueOf(this.porcentajeParcial) );
     }
 
+    public String joinNotas()
+    {
+        StringBuilder sb = new StringBuilder();
+        boolean last = false;
+        for(Nota nota : this.notas)
+        {
+            if( last )
+                sb.append( "," );
 
+            sb.append( nota );
+            last = true;
+        }
+
+        return sb.toString();
+    }
+
+    public boolean tieneDatos()
+    {
+        return  this.porcentajeNota != 0 &&
+                this.porcentajeParcial != 0;
+    }
 
 }

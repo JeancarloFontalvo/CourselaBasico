@@ -5,6 +5,8 @@ import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.KeyEvent;
 import android.view.View;
 import android.widget.Button;
@@ -16,6 +18,10 @@ import com.example.chino.courselabasico.baseDatos.BaseDatos;
 import com.example.chino.courselabasico.baseDatos.DataBaseManager;
 import com.example.chino.courselabasico.models.Corte;
 import com.example.chino.courselabasico.models.Materia;
+import com.example.chino.courselabasico.models.Porcentaje;
+import com.example.chino.courselabasico.models.ShareData;
+
+import java.util.ArrayList;
 
 public class ActivityIngresarNotas extends AppCompatActivity  {
 
@@ -130,31 +136,127 @@ public class ActivityIngresarNotas extends AppCompatActivity  {
             }
         });
 
-        Intent i = getIntent();
-        setIntent(i);
-
-
-        /*if( i != null && i.getExtras() != null)
-        {
-            //Corte cort = (Corte) i.getSerializableExtra(Corte.class.toString());
-            //etNumero1.setText( String.valueOf( cort.getNotaDefinitiva() ) );
-            if(i.getStringExtra( "corteId" ).equals( "1" ) )
-            {
-                etNumero1.setText(  String.valueOf( i.getExtras().getDouble( "corteDefinitiva" ) ) );
-            }
-
-            if(i.getStringExtra( "corteId" ).equals( "2" ) )
-            {
-                etNumero2.setText(  String.valueOf( i.getExtras().getDouble( "corteDefinitiva" ) ) );
-            }
-
-            if(i.getStringExtra( "corteId" ).equals( "3" ) )
-            {
-                etNumero3.setText(  String.valueOf( i.getExtras().getDouble( "corteDefinitiva" ) ) );
-            }
-        }
-*/
+        init();
     }
+
+    private void init()
+    {
+        etNumero1.addTextChangedListener( new TextWatcher() {
+
+            public void onTextChanged(CharSequence s, int start, int before,
+                                      int count) {
+
+
+            }
+
+            public void beforeTextChanged(CharSequence s, int start, int count,
+                                          int after) {
+
+            }
+
+            public void afterTextChanged(Editable s) {
+                Corte corte = Materia.getCorte( 1 );
+
+                if( !s.toString().equals( "" ) )
+                {
+
+
+                    double note = Double.valueOf( s.toString() );
+
+                    if(!corte.tieneDetalle)
+                    {
+                        corte.setNotaDefinitiva( note )
+                                .setNotaParcial( note * 0.5 )
+                                .addNota( note * 0.5  );
+
+                        btnSubNota1.setEnabled(corte.tieneDetalle);
+                    }
+                    else
+                        btnSubNota2.setEnabled(true);
+                }
+
+                btnSubNota1.setEnabled(true);
+            }
+        } );
+
+        etNumero2.addTextChangedListener( new TextWatcher() {
+
+            public void onTextChanged(CharSequence s, int start, int before,
+                                      int count) {
+
+
+            }
+
+            public void beforeTextChanged(CharSequence s, int start, int count,
+                                          int after) {
+
+            }
+
+            public void afterTextChanged(Editable s) {
+                Corte corte = Materia.getCorte( 2 );
+
+                if( !s.toString().equals( "" ) )
+                {
+
+
+                    double note = Double.valueOf( s.toString() );
+
+                    if(!corte.tieneDetalle)
+                    {
+                        corte.setNotaDefinitiva( note )
+                                .setNotaParcial( note * 0.5 )
+                                .addNota( note * 0.5  );
+
+                        btnSubNota2.setEnabled(corte.tieneDetalle);
+                    }
+                    else
+                        btnSubNota2.setEnabled(true);
+                }
+                else
+                    btnSubNota2.setEnabled(true);
+            }
+        } );
+
+        etNumero3.addTextChangedListener( new TextWatcher() {
+
+            public void onTextChanged(CharSequence s, int start, int before,
+                                      int count) {
+
+
+            }
+
+            public void beforeTextChanged(CharSequence s, int start, int count,
+                                          int after) {
+
+            }
+
+            public void afterTextChanged(Editable s) {
+                Corte corte = Materia.getCorte( 3 );
+
+                if( !s.toString().equals( "" ) )
+                {
+
+
+                    double note = Double.valueOf( s.toString() );
+
+                    if(!corte.tieneDetalle)
+                    {
+                        corte.setNotaDefinitiva( note )
+                            .setNotaParcial( note * 0.5 )
+                            .addNota( note * 0.5  );
+
+                        btnSubNota3.setEnabled(corte.tieneDetalle);
+                    }
+                    else
+                        btnSubNota3.setEnabled(true);
+                }
+                else
+                    btnSubNota3.setEnabled(true);
+
+            }
+        } );
+    }
+
 
     public  void llamarSubnotas1(View v)
     {
@@ -189,6 +291,12 @@ public class ActivityIngresarNotas extends AppCompatActivity  {
         numero2=etNumero2.getText().toString();
         numero3=etNumero3.getText().toString();
 
+        BaseDatos db                        = new BaseDatos(this);
+        ArrayList<Porcentaje> porcentajes   = db.getAllPorcentajes();
+
+        ShareData.put( "porcentajes", porcentajes.get( 0 ) );
+
+
         nombre=tvNombreMateria.getText().toString();
 
         btnGuardar.setEnabled(true);
@@ -196,12 +304,14 @@ public class ActivityIngresarNotas extends AppCompatActivity  {
         //se valida de que nungun editText este vacio
         if(numero1.equals("")|| numero2.equals("")|| numero3.equals("")|| nombre.equals(""))
         {
-
             Toast.makeText(ActivityIngresarNotas.this, "Por favor Ingrese las todos los campos  ", Toast.LENGTH_SHORT).show();
         }
 
         else {
-            resultadoFinal = (Double.parseDouble(numero1) * 0.2) + (Double.parseDouble(numero2) * 0.3) + (Double.parseDouble(numero3) * 0.5);
+
+            Porcentaje porcentaje = porcentajes.get( 0 );
+
+            resultadoFinal = (Double.parseDouble(numero1) * porcentaje.getcorte1() / 100 ) + (Double.parseDouble(numero2) * porcentaje.getCorte2() / 100) + (Double.parseDouble(numero3) * porcentaje.getCorte3() / 100);
 
             if (String.valueOf(resultadoFinal).length() > 3) {
                 resultadoParaGuardar = (String.valueOf(resultadoFinal).substring(0, 3));
@@ -259,11 +369,13 @@ public class ActivityIngresarNotas extends AppCompatActivity  {
         contentValues.put(DataBaseManager.MATERIA_DEFINITIVA,Nota);
         contentValues.put(DataBaseManager.MATERIA_CORTE1,           Materia.corte1.getNotaDefinitiva());
         contentValues.put(DataBaseManager.MATERIA_CORTE1_PARCIAL,   Materia.corte1.getNotaParcial());
-        contentValues.put(DataBaseManager.MATERIA_CORTE1_SUBNOTA,   Materia.corte1.getNotas()  );
-        contentValues.put(DataBaseManager.MATERIA_DEFINITIVA,Nota);
-        contentValues.put(DataBaseManager.MATERIA_DEFINITIVA,Nota);
-        contentValues.put(DataBaseManager.MATERIA_DEFINITIVA,Nota);
-        contentValues.put(DataBaseManager.MATERIA_DEFINITIVA,Nota);
+        contentValues.put(DataBaseManager.MATERIA_CORTE1_SUBNOTA,   Materia.corte1.getNotas().size() > 0 ? Materia.corte1.joinNotas() : ""  );
+        contentValues.put(DataBaseManager.MATERIA_CORTE2,           Materia.corte2.getNotaDefinitiva());
+        contentValues.put(DataBaseManager.MATERIA_CORTE2_PARCIAL,   Materia.corte2.getNotaParcial());
+        contentValues.put(DataBaseManager.MATERIA_CORTE2_SUBNOTA,   Materia.corte2.getNotas().size() > 0 ? Materia.corte2.joinNotas() : ""  );
+        contentValues.put(DataBaseManager.MATERIA_CORTE3,           Materia.corte3.getNotaDefinitiva());
+        contentValues.put(DataBaseManager.MATERIA_CORTE3_PARCIAL,   Materia.corte3.getNotaParcial());
+        contentValues.put(DataBaseManager.MATERIA_CORTE3_SUBNOTA,   Materia.corte3.getNotas().size() > 0 ? Materia.corte3.joinNotas() : ""  );
         contentValues.put(DataBaseManager.MATERIA_FOTO,CARITA_MOTICON);
 
         db.add(DataBaseManager.NOMBRE_TABLA_MATERIA,contentValues);

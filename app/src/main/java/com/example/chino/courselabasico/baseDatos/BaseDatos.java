@@ -38,16 +38,18 @@ public class BaseDatos extends SQLiteOpenHelper
         db.execSQL(DataBaseManager.CREAR_TABLA_CORTEMATERIA);
         db.execSQL(DataBaseManager.CREAR_TABLA_NOTAS);
 
+        db.execSQL(DataBaseManager.CONFIGURE_PORCENTAJES);
+
     }
 
     //PARA QUE ACTUALIZE LA BD EN CASO DE TRABAJAR CON OTRA VERSION
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
         //SI LA TABLA YA ESTA QUE LA BORRE
-        db.execSQL("DROP TABLE IF EXIST " + DataBaseManager.CREAR_TABLA_NOTAS);
-        db.execSQL("DROP TABLE IF EXIST " + DataBaseManager.CREAR_TABLA_CORTEMATERIA);
-        db.execSQL("DROP TABLE IF EXIST " + DataBaseManager.CREAR_TABLA_MATERIA);
-        db.execSQL("DROP TABLE IF EXIST " + DataBaseManager.CREAR_TABLA_PORCETAJECORTES);
+        db.execSQL("DROP TABLE IF EXIST " + DataBaseManager.NOMBRE_TABLA_NOTA);
+        db.execSQL("DROP TABLE IF EXIST " + DataBaseManager.NOMBRE_TABLA_CORTEMATERIA);
+        db.execSQL("DROP TABLE IF EXIST " + DataBaseManager.NOMBRE_TABLA_MATERIA);
+        db.execSQL("DROP TABLE IF EXIST " + DataBaseManager.NOMBRE_TABLA_PORCENTAJECORTES);
 
         //CREA LA BD
         onCreate(db);

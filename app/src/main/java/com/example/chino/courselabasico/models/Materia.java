@@ -70,4 +70,11 @@ public class Materia
     public void setMateriaDefinitiva(Double materiaDefinitiva) {
         this.materiaDefinitiva = materiaDefinitiva;
     }
+
+    public static void resetCortes()
+    {
+        corte1 = null;
+        corte2 = null;
+        corte3 = null;
+    }
 }

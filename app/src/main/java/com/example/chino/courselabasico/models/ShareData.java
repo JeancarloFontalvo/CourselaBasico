@@ -8,5 +8,21 @@ import java.util.HashMap;
 
 public class ShareData
 {
-    public static HashMap<String, Object> data;
+    private static HashMap<String, Object> _data;
+
+    public static HashMap<String, Object> data()
+    {
+        if(_data != null) _data = new HashMap<>();
+
+        return  _data;
+    }
+
+    public static HashMap<String, Object> data(String key, Object value)
+    {
+        _data = data();
+
+        _data.put( key, value );
+
+        return  _data;
+    }
 }

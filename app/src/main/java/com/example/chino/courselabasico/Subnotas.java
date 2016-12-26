@@ -21,6 +21,7 @@ import org.w3c.dom.Text;
 import java.util.*;
 import java.util.concurrent.ScheduledThreadPoolExecutor;
 import com.example.chino.courselabasico.models.Corte;
+import com.example.chino.courselabasico.models.Materia;
 import com.example.chino.courselabasico.models.Nota;
 
 public class Subnotas extends AppCompatActivity implements View.OnClickListener {
@@ -37,15 +38,21 @@ public class Subnotas extends AppCompatActivity implements View.OnClickListener 
     TextView        tvResult;
 
     int         contador    =   0;
+    long        corteId     =   0;
     EditText    addEditText;
 
     // Notes List
     ArrayList<EditText> subNotesEditText    = new ArrayList<EditText>();
     ArrayList<Nota>     notas               = new ArrayList<>();
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_subnotas);
+
+        Intent i = getIntent();
+        this.corteId = i.getIntExtra( "corteId", 0 );
+
         this.init();
     }
 
@@ -129,9 +136,12 @@ public class Subnotas extends AppCompatActivity implements View.OnClickListener 
 
             case R.id.btnCalcularSubNotas:
                     // Checkeamos si los campos estan llenos
-                    if( this.allFilledFields() )
                     // Si estan llenos, los calculamos
-                    this.tvResult.setText( String.valueOf( this.calculateHandler() ) );
+                    if( this.allFilledFields() )
+                    {
+                        this.tvResult.setText( String.valueOf( this.calculateHandler() ) );
+                        this.btnGuardar.setEnabled(true);
+                    }
                 break;
         }
     }
@@ -179,15 +189,61 @@ public class Subnotas extends AppCompatActivity implements View.OnClickListener 
     }
 
     private int saveHandler() {
-        throw new UnsupportedOperationException("Aun no se puede guardar");  //llamando a el activity de detalles y se le mandan por parametros los textos
-//        Intent i = new Intent(this,DetalleListaMateria.class);
-//
-//        i.putExtra("param_notadefinitiva",tvResult.getText());
-//
-////                i.putExtra("param_corte2",Materia.getNotaCorte2());
-////                i.putExtra("param_corte3",Materia.getNotaCorte3());
-//
-//        this.startActivity(i);
+        //throw new UnsupportedOperationException("Aun no se puede guardar");  //llamando a el activity de detalles y se le mandan por parametros los textos
+
+
+        Intent  intentito = new Intent( this, ActivityIngresarNotas.class );
+
+        Corte   cortecito = new Corte(
+                Double.valueOf( this.tvResult.getText().toString() ),
+                Double.valueOf( this.etNotaParcial.getText().toString() )
+        );
+
+        cortecito.setContext(this);
+
+        cortecito.setId( this.corteId )
+                .setPorcentajeParcial  ( Double.valueOf( this.etPorcentajeParcial.getText().toString() ) )
+                .setPorcentajeNota     ( Double.valueOf( this.etPorcentajeNotas.getText().toString() ) );
+
+        List<Double> notas = this.getNotes();
+
+        intentito.putExtra("corteId", this.corteId);
+        intentito.putExtra("corteDefinitiva",   cortecito.getNotaDefinitiva());
+        intentito.putExtra("cortePorcentaje",   cortecito.getPorcentaje());
+        intentito.putExtra("corteNotaParcial",  cortecito.getNotaParcial());
+
+
+        int i = 0;
+        for(double note : notas)
+        {
+            cortecito.addNota( note );
+            intentito.putExtra("corteNota" + i, note);
+            i++;
+        }
+
+        switch (String.valueOf(this.corteId))
+        {
+            case "1":
+                    Materia.corte1 = cortecito;
+                break;
+
+            case "2":
+                    Materia.corte2 = cortecito;
+                break;
+
+            case "3":
+                    Materia.corte3 = cortecito;
+                break;
+        }
+
+        intentito.putExtra("countNotas",        cortecito.getNotas().size());
+
+        //long id = cortecito.save();
+
+        //intentito.putExtra(Corte.class.toString(), cortecito);
+        startActivity( intentito );
+
+        return 0;
     }
 
     private List<Double> getNotes() {

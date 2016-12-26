@@ -14,6 +14,8 @@ import android.widget.Toast;
 
 import com.example.chino.courselabasico.baseDatos.BaseDatos;
 import com.example.chino.courselabasico.baseDatos.DataBaseManager;
+import com.example.chino.courselabasico.models.Corte;
+import com.example.chino.courselabasico.models.Materia;
 
 public class ActivityIngresarNotas extends AppCompatActivity  {
 
@@ -37,7 +39,58 @@ public class ActivityIngresarNotas extends AppCompatActivity  {
     String resultadoParaGuardar;
     Integer CARITA_MOTICON;
 
+    public long idMateria = 0;
+    public long idCorte1 = 0;
+    public long idCorte2 = 0;
+    public long idCorte3 = 0;
 
+
+    @Override
+    protected void onNewIntent(Intent intent) {
+        super.onNewIntent(intent);
+        setIntent(intent);
+    }
+
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+
+        Intent i = getIntent();
+        setIntent(i);
+
+
+        if(Materia.corte1 != null)
+            etNumero1.setText(  String.valueOf( Materia.corte1.getNotaDefinitiva() ) );
+
+        if(Materia.corte2 != null)
+            etNumero2.setText(  String.valueOf( Materia.corte2.getNotaDefinitiva() ) );
+
+        if(Materia.corte3 != null)
+            etNumero3.setText(  String.valueOf( Materia.corte3.getNotaDefinitiva() ) );
+
+
+
+        /*if( i != null && i.getExtras() != null)
+        {
+            //Corte cort = (Corte) i.getSerializableExtra(Corte.class.toString());
+            //etNumero1.setText( String.valueOf( cort.getNotaDefinitiva() ) );
+            if(i.getStringExtra( "corteId" ).equals( "1" ) )
+            {
+                etNumero1.setText(  String.valueOf( i.getExtras().getDouble( "corteDefinitiva" ) ) );
+            }
+
+            if(i.getStringExtra( "corteId" ).equals( "2" ) )
+            {
+                etNumero2.setText(  String.valueOf( i.getExtras().getDouble( "corteDefinitiva" ) ) );
+            }
+
+            if(i.getStringExtra( "corteId" ).equals( "3" ) )
+            {
+                etNumero3.setText(  String.valueOf( i.getExtras().getDouble( "corteDefinitiva" ) ) );
+            }
+        }*/
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -77,21 +130,46 @@ public class ActivityIngresarNotas extends AppCompatActivity  {
             }
         });
 
+        Intent i = getIntent();
+        setIntent(i);
+
+
+        /*if( i != null && i.getExtras() != null)
+        {
+            //Corte cort = (Corte) i.getSerializableExtra(Corte.class.toString());
+            //etNumero1.setText( String.valueOf( cort.getNotaDefinitiva() ) );
+            if(i.getStringExtra( "corteId" ).equals( "1" ) )
+            {
+                etNumero1.setText(  String.valueOf( i.getExtras().getDouble( "corteDefinitiva" ) ) );
+            }
+
+            if(i.getStringExtra( "corteId" ).equals( "2" ) )
+            {
+                etNumero2.setText(  String.valueOf( i.getExtras().getDouble( "corteDefinitiva" ) ) );
+            }
+
+            if(i.getStringExtra( "corteId" ).equals( "3" ) )
+            {
+                etNumero3.setText(  String.valueOf( i.getExtras().getDouble( "corteDefinitiva" ) ) );
+            }
+        }
+*/
     }
 
     public  void llamarSubnotas1(View v)
     {
         //  llama a la actividad en donde esta el recycler view
         Intent i = new Intent(this,Subnotas.class);
-//        i.putExtra("param_subnotasCorte1","corte1");
+        i.putExtra("corteId", 1);
         this.startActivity(i);
+//        finish();
     }
 
     public  void llamarSubnotas2(View v)
     {
         //  llama a la actividad en donde esta el recycler view
         Intent i = new Intent(this,Subnotas.class);
-//        i.putExtra("param_subnotasCorte1","corte1");
+        i.putExtra("corteId",2);
         this.startActivity(i);
     }
 
@@ -100,12 +178,9 @@ public class ActivityIngresarNotas extends AppCompatActivity  {
         //  llama a la actividad en donde esta el recycler view
 
         Intent i = new Intent(this,Subnotas.class);
-//        i.putExtra("param_subnotasCorte1","corte1");
+        i.putExtra("corteId",3);
         this.startActivity(i);
     }
-
-
-
 
     public  void caluloNotas()
     {
@@ -188,15 +263,18 @@ public class ActivityIngresarNotas extends AppCompatActivity  {
         contentValues.put(DataBaseManager.MATERIA_DEFINITIVA,corte1);
         contentValues.put(DataBaseManager.MATERIA_FOTO,CARITA_MOTICON);
 
-        db.addMateria(DataBaseManager.NOMBRE_TABLA_MATERIA,contentValues);
+        db.add(DataBaseManager.NOMBRE_TABLA_MATERIA,contentValues);
         Toast.makeText(this, "Se Guardo las notas de la Asignatura"+NombreMat, Toast.LENGTH_SHORT).show();
-       //cierra la actividad en curso
+        //cierra la actividad en curso
         finish();
-      //  llama a la actividad en donde esta el recycler view
+        //  llama a la actividad en donde esta el recycler view
         Intent i = new Intent(this,ListaMaterias.class);
         this.startActivity(i);
 
 //        inicializarAdaptador();
 //        inicializarListaContactos();
     }
+
+
+
 }

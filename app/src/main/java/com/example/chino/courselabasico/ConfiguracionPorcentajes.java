@@ -10,8 +10,6 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.chino.courselabasico.ListaMaterias;
-import com.example.chino.courselabasico.R;
 import com.example.chino.courselabasico.baseDatos.BaseDatos;
 import com.example.chino.courselabasico.baseDatos.DataBaseManager;
 
@@ -61,7 +59,7 @@ public class ConfiguracionPorcentajes extends AppCompatActivity {
         contentValues.put(DataBaseManager.PORCENTAJECORTES_CORTE3,Corte3);
 
 
-        db.addMateria(DataBaseManager.NOMBRE_TABLA_PORCENTAJECORTES,contentValues);
+        db.add(DataBaseManager.NOMBRE_TABLA_PORCENTAJECORTES,contentValues);
         Toast.makeText(this, "Se Guardo con exito ", Toast.LENGTH_SHORT).show();
         //cierra la actividad en curso
         finish();

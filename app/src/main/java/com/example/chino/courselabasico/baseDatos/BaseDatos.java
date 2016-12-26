@@ -196,11 +196,13 @@ public class BaseDatos extends SQLiteOpenHelper
     }
 
     //metodo que inserta una materia registros de la bd
-    public  void  addMateria(String Table, ContentValues contentValues)
+    public  long add(String Table, ContentValues contentValues)
     {
-        SQLiteDatabase db = this.getWritableDatabase();
-        db.insert(Table, null, contentValues);
+        SQLiteDatabase  db      = this.getWritableDatabase();
+        long            result  = db.insert(Table, null, contentValues);
         db.close();
+
+        return result;
     }
 
     // - - - - - - - - - - - - - - - - - - - - - -  - - - - - -
@@ -209,13 +211,15 @@ public class BaseDatos extends SQLiteOpenHelper
 
 
     //metodo que inserta una materia registros de la bd
-    public  void  updateMateria(String Table, String column, int id, ContentValues contentValues)
+    public  long update(String Table, String column, int id, ContentValues contentValues)
     {
         SQLiteDatabase  db          = this.getWritableDatabase();
         String[]        parameters  = new String[] { String.valueOf( id ) };
 
-        db.update(Table, contentValues, column + " = ?", parameters);
+        long result                 = db.update(Table, contentValues, column + " = ?", parameters);
         db.close();
+
+        return result;
     }
 
     // - - - - - - - - - - - - - - - - - - - - - -  - - - - - -
@@ -224,13 +228,25 @@ public class BaseDatos extends SQLiteOpenHelper
 
 
     //metodo que inserta una materia registros de la bd
-    public  void  deleteMateria(String Table, String column, int id)
+    public  long delete(String Table, String column, int id)
     {
         SQLiteDatabase  db          = this.getWritableDatabase();
         String[]        parameters  = new String[] { String.valueOf( id ) };
 
-        db.delete(Table, column + " = ?", parameters);
+        long result                 = db.delete(Table, column + " = ?", parameters);
         db.close();
+
+        return result;
+    }
+
+    //metodo que inserta una materia registros de la bd
+    public  long currentId(String Table, String idColumn)
+    {
+        SQLiteDatabase  db          = this.getWritableDatabase();
+        Cursor          cursor      = db.query(Table, new String[]{ "MAX(" + idColumn + ")" }, null, null, null, null, null);
+        cursor.moveToLast();
+
+        return cursor.getInt( 0 );
     }
 
     // ---------------------------------------------------

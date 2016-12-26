@@ -11,6 +11,10 @@ public class Materia
     private int      imagenId;
     private Double   materiaDefinitiva;
 
+    public static Corte corte1 = null;
+    public static Corte corte2 = null;
+    public static Corte corte3 = null;
+
 
 
 

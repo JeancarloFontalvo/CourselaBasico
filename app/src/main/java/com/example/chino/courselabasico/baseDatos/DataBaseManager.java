@@ -10,6 +10,15 @@ public class DataBaseManager {
     public static  final String MATERIA_ID              =   "materia_id";
     public static  final String MATERIA_NOMBRE_MATERIA  =   "materia_nombre";
     public static  final String MATERIA_FOTO            =   "materia_foto";
+    public static  final String MATERIA_CORTE1          =   "materia_corte1";
+    public static  final String MATERIA_CORTE1_PARCIAL  =   "materia_corte1_parcial";
+    public static  final String MATERIA_CORTE1_SUBNOTA  =   "materia_corte1_subnota";
+    public static  final String MATERIA_CORTE2          =   "materia_foto";
+    public static  final String MATERIA_CORTE2_PARCIAL  =   "materia_corte2_parcial";
+    public static  final String MATERIA_CORTE2_SUBNOTA  =   "materia_corte2_subnota";
+    public static  final String MATERIA_CORTE3          =   "materia_foto";
+    public static  final String MATERIA_CORTE3_PARCIAL  =   "materia_corte3_parcial";
+    public static  final String MATERIA_CORTE3_SUBNOTA  =   "materia_corte3_subnota";
     public static  final String MATERIA_DEFINITIVA      =   "materia_definitiva";
 
     //estas son las constantes de la tabla corteMateria
@@ -38,12 +47,20 @@ public class DataBaseManager {
     public static  String restultado[] = new String[9];;
 
 
-
     //sentencias sql ara crear la tabla MATERIAs
     public static   final String CREAR_TABLA_MATERIA =
             " create table " + NOMBRE_TABLA_MATERIA+" ("+
                     MATERIA_ID             + " INTEGER PRIMARY KEY AUTOINCREMENT,"+
                     MATERIA_NOMBRE_MATERIA + " TEXT , " +
+                    MATERIA_CORTE1     + " REAL  , " +
+                    MATERIA_CORTE2     + " REAL  , " +
+                    MATERIA_CORTE3     + " REAL  , " +
+                    MATERIA_CORTE1_PARCIAL     + " REAL  , " +
+                    MATERIA_CORTE2_PARCIAL     + " REAL  , " +
+                    MATERIA_CORTE2_PARCIAL     + " REAL  , " +
+                    MATERIA_CORTE1_SUBNOTA     + " REAL  , " +
+                    MATERIA_CORTE2_SUBNOTA     + " REAL  , " +
+                    MATERIA_CORTE3_SUBNOTA     + " REAL  , " +
                     MATERIA_DEFINITIVA     + " REAL  , " +
                     MATERIA_FOTO           + " INTEGER NOT NULL"+");";
 

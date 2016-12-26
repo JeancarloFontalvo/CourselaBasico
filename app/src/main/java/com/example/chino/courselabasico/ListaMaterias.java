@@ -24,6 +24,8 @@ public class ListaMaterias extends AppCompatActivity {
     ArrayList <Materia>  materias;
     private RecyclerView listaMaterias;
 
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

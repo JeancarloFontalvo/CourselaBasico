@@ -260,7 +260,7 @@ public class ActivityIngresarNotas extends AppCompatActivity  {
 
         ContentValues contentValues = new ContentValues();
         contentValues.put(DataBaseManager.MATERIA_NOMBRE_MATERIA,NombreMat);
-        contentValues.put(DataBaseManager.MATERIA_DEFINITIVA,corte1);
+        contentValues.put(DataBaseManager.MATERIA_DEFINITIVA,Nota);
         contentValues.put(DataBaseManager.MATERIA_FOTO,CARITA_MOTICON);
 
         db.add(DataBaseManager.NOMBRE_TABLA_MATERIA,contentValues);

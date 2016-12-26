@@ -225,8 +225,6 @@ public class ActivityIngresarNotas extends AppCompatActivity  {
         }
     }
     //metodos de manejan el espiner
-
-
     ////////////////////////////////////////////////////////////////////////////////////////////////
 
     //en caso de pulsar l boton atras
@@ -242,8 +240,6 @@ public class ActivityIngresarNotas extends AppCompatActivity  {
     }
     return super.onKeyDown(keyCode, event);
     }
-
-
     /////////////////////////////////////////////////////////////////////////////////////////////
     //se ejecuta esta funcion cuando el usuario pulsa el boton guardar
     public  void  insertarNotas(View v ){

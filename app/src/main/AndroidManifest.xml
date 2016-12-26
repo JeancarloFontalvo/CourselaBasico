@@ -56,7 +56,15 @@
 
 
 
-        <activity android:name=".Subnotas"></activity>
+        <activity android:name=".Subnotas"
+            android:parentActivityName=".ActivityIngresarNotas">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".ActivityIngresarNotas" />
+            />
+
+
+        </activity>
     </application>
 
 </manifest>

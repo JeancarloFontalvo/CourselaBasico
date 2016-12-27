@@ -5,13 +5,9 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
-import android.widget.Toast;
 
-import com.example.chino.courselabasico.ListaMaterias;
 import com.example.chino.courselabasico.models.*;
 
-import java.lang.reflect.Array;
-import java.sql.DatabaseMetaData;
 import java.util.ArrayList;
 
 /**
@@ -73,21 +69,19 @@ public class BaseDatos extends SQLiteOpenHelper
             //setea en e campo id
             materias.add( new Materia(
                     // Obtengo el id
-                    registros.getInt(
-                            registros.getColumnIndex(DataBaseManager.MATERIA_ID)
-                    ),
+                    registros.getInt(registros.getColumnIndex(DataBaseManager.MATERIA_ID)),
                     // Obtengo el nombre
-                    registros.getString(
-                            registros.getColumnIndex(DataBaseManager.MATERIA_NOMBRE_MATERIA)
-                    ),
+                    registros.getString(registros.getColumnIndex(DataBaseManager.MATERIA_NOMBRE_MATERIA)),
                     // obtengo el id de la foto
-                    registros.getInt(
-                            registros.getColumnIndex(DataBaseManager.MATERIA_FOTO)
-                    ),
+                    registros.getInt(registros.getColumnIndex(DataBaseManager.MATERIA_FOTO)),
                     // obtengo el id de la foto
-                    registros.getDouble(
-                            registros.getColumnIndex(DataBaseManager.MATERIA_DEFINITIVA)
-                    )
+                    registros.getDouble(registros.getColumnIndex(DataBaseManager.MATERIA_CORTE1)),
+                    // obtengo el id de la foto
+                    registros.getDouble( registros.getColumnIndex(DataBaseManager.MATERIA_CORTE2)),
+                    // obtengo el id de la foto
+                    registros.getDouble(registros.getColumnIndex(DataBaseManager.MATERIA_CORTE3)),
+                    // obtengo el id de la foto
+                    registros.getDouble(registros.getColumnIndex(DataBaseManager.MATERIA_DEFINITIVA))
                     ) );
 
         }

@@ -91,12 +91,8 @@ public class ListaMaterias extends AppCompatActivity {
 
     public void nuevocontacto (View v)
     {
-
         Intent i = new Intent(this,ActivityIngresarNotas.class);
         this.startActivity(i);
-
-
-
     }
 
     //instancia de contacto adaptador
@@ -110,16 +106,7 @@ public class ListaMaterias extends AppCompatActivity {
     {
         BaseDatos db    = new BaseDatos(this);
         materias        = new ArrayList<Materia>();
-
         // cuando carga el elemento se carga el array list
         materias        = db.getAllMaterias();
-
-
-
-
-
     }
-
-
-
 }

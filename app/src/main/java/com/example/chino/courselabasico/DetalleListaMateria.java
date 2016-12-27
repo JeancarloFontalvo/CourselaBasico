@@ -12,6 +12,7 @@ public class DetalleListaMateria extends AppCompatActivity {
     TextView tvCorte1;
     TextView tvCorte2;
     TextView tvCorte3;
+    TextView tvNotadefinitiva;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,23 +31,26 @@ public class DetalleListaMateria extends AppCompatActivity {
 
         // guarda en una variable el parametro mandad cuando esta actividad es creada
         // los nombres de  parametros vienen de el archivo string.xml
-        String nombre = parametros.getString("param_Nombre");
+        String nombre = parametros.getString("param_nombremateria");
         // en este caso el id del bundle viene por un nombre
         String corte1 = parametros.getString("param_corte1");
         String corte2 = parametros.getString("param_corte2");
         String corte3 = parametros.getString("param_corte3");
+        String notadefinitiva = parametros.getString("param_notaDefinitiva");
 
         //obteniendo los id de las vistas e ingresandoles los parametros que vienen de la actividad ListaMaterias
-        tvNombre = (TextView) findViewById(R.id.tvNombreContacto);
+        tvNombre = (TextView) findViewById(R.id.tvNombreMateria);
         tvCorte1 = (TextView) findViewById(R.id.tvCorte1);
         tvCorte2 = (TextView) findViewById(R.id.tvCorte2);
         tvCorte3 = (TextView) findViewById(R.id.tvCorte3);
+        tvNotadefinitiva=(TextView)findViewById(R.id.tvDefinitiva);
 
         // le agrega el nombre de los parametros recibidos  a las vistas para colocarle los diferentes nombres
         tvNombre.setText(nombre);
         tvCorte1.setText(corte1);
         tvCorte2.setText(corte2);
         tvCorte3.setText(corte3);
+        tvNotadefinitiva.setText(notadefinitiva);
     }
 
     @Override

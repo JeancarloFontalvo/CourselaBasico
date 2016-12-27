@@ -9,6 +9,10 @@ public class Materia
     private int      id;
     private String   nombre;
     private int      imagenId;
+
+    private Double   notaCorte1;
+    private Double   notaCorte2;
+    private Double   notaCorte3;
     private Double   materiaDefinitiva;
 
     public static Corte corte1 = null;
@@ -43,11 +47,14 @@ public class Materia
         return  cortecito;
     }
 
-    public Materia(int id, String nombre, int imagenId, Double materiaDefinitiva)
+    public Materia(int id, String nombre, int imagenId, Double notaCorte1, Double notaCorte2, Double notaCorte3, Double materiaDefinitiva)
     {
 
         this.nombre     = nombre;
         this.imagenId   = imagenId;
+        this.notaCorte1 = notaCorte1;
+        this.notaCorte2 = notaCorte2;
+        this.notaCorte3 = notaCorte3;
         this.materiaDefinitiva = materiaDefinitiva;
     }
 
@@ -101,5 +108,29 @@ public class Materia
         corte1 = null;
         corte2 = null;
         corte3 = null;
+    }
+
+    public Double getNotaCorte1() {
+        return notaCorte1;
+    }
+
+    public void setNotaCorte1(Double notaCorte1) {
+        this.notaCorte1 = notaCorte1;
+    }
+
+    public Double getNotaCorte2() {
+        return notaCorte2;
+    }
+
+    public void setNotaCorte2(Double notaCorte2) {
+        this.notaCorte2 = notaCorte2;
+    }
+
+    public Double getNotaCorte3() {
+        return notaCorte3;
+    }
+
+    public void setNotaCorte3(Double notaCorte3) {
+        this.notaCorte3 = notaCorte3;
     }
 }

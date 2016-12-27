@@ -2,6 +2,7 @@
 <android.support.v7.widget.CardView
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:cardView="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     cardView:cardCornerRadius="4dp"
@@ -20,6 +21,7 @@
             android:layout_height="wrap_content"
             android:orientation="horizontal"
             android:layout_margin="5dp"
+            android:layout_gravity="center"
             >
             <ImageView
                 android:layout_width="80dp"
@@ -57,7 +59,87 @@
                     android:textSize="23sp"
                     android:textColor="@color/colorAccent"
 
-                    />
+                    android:textAllCaps="true" />
+
+                <!--Nota del corte1-->
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:visibility="gone">
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Corte 1: "
+                        android:layout_marginTop="10sp"
+                        android:textSize="15sp"
+
+                        android:textColor="@color/negro"/>
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Corte1"
+                        android:textStyle="bold"
+                        android:layout_marginTop="10sp"
+                        android:id="@+id/tvNotaCorte1"
+                        android:textSize="15sp"/>
+                </LinearLayout>
+
+
+                <!-- notas del corte 2-->
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:visibility="gone">
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Corte 2 :"
+                        android:layout_marginTop="10sp"
+                        android:textSize="15sp"
+
+                        android:textColor="@color/negro"
+                        tools:text="Corte 2: " />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="corte2"
+                        android:textStyle="bold"
+                        android:layout_marginTop="10sp"
+                        android:id="@+id/tvNotaCorte2"
+                        android:textSize="15sp"/>
+                </LinearLayout>
+
+                <!--Nota del corte 3-->
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:visibility="gone">
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Corte 3: "
+                        android:layout_marginTop="10sp"
+
+                        android:textSize="15sp"
+
+                        android:textColor="@color/negro"/>
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="corte3"
+                        android:textStyle="bold"
+                        android:layout_marginTop="10sp"
+                        android:id="@+id/tvNotaCorte3"
+                        android:textSize="15sp"/>
+                </LinearLayout>
+
+                <!--NOTE DEFINITIVA-->
                 <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -75,10 +157,10 @@
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="@string/pEmail"
+                        android:text="notaFinal"
                         android:textStyle="bold"
                         android:layout_marginTop="10sp"
-                        android:id="@+id/tvNotaCorte1"
+                        android:id="@+id/tvNotaDefinitiva"
                         android:textSize="15sp"/>
             </LinearLayout>
 <!--nota numero 2-->

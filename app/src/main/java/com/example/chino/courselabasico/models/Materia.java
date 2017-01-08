@@ -33,13 +33,13 @@ public class Materia
             
             case 2:
                     corte2      = corte2 == null ? new Corte() : corte2;
-                    corte1.setId( 2 );
+                    corte2.setId( 2 );
                     cortecito   = corte2;
                 break;
             
             case 3:
                     corte3      = corte3 == null ? new Corte() : corte3;
-                    corte1.setId( 3 );
+                    corte3.setId( 3 );
                     cortecito   = corte3;
                 break;
         }

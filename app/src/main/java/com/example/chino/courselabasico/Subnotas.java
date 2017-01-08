@@ -102,12 +102,15 @@ public class Subnotas extends AppCompatActivity implements View.OnClickListener 
     public void initWithData()
     {
         Corte corte =  Materia.getCorte( Integer.valueOf( String.valueOf(this.corteId) ) );
-        if( corte.getId() > 0 && corte.tieneDatos())
+        if( corte != null)
         {
-            etPorcentajeNotas   .setText( String.valueOf( corte.getPorcentajeNota() ) );
-            etPorcentajeParcial .setText( String.valueOf( corte.getPorcentajeParcial() ) );
-            etNotaParcial       .setText( String.valueOf( corte.getNotaParcial() ) );
-            getNotes(this, corte.getNotas());
+            if(corte.getId() > 0 && corte.tieneDatos())
+            {
+                etPorcentajeNotas   .setText( String.valueOf( corte.getPorcentajeNota() ) );
+                etPorcentajeParcial .setText( String.valueOf( corte.getPorcentajeParcial() ) );
+                etNotaParcial       .setText( String.valueOf( corte.getNotaParcial() ) );
+                getNotes(this, corte.getNotas());
+            }
         }
     }
 
